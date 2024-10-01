@@ -1,6 +1,6 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Tables - Basic Tables')
+@section('title', 'Cart')
 
 @section('page-script')
     <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
@@ -60,7 +60,7 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Actions</th>
+                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -73,11 +73,11 @@
                                 </td>
                                 <td>
                                     <input type="number" class="form-control quantity-input" name="quantity"
-                                        value="{{ $cart_item->quantity }}" min="1" style="width: 100px;"
+                                        value="{{ $cart_item->quantity }}" min="1" max={{ $cart_item->product->quantity }} style="width: 100px;"
                                         data-cart-item-id="{{ $cart_item->id }}">
                                 </td>
                                 <td>{{ $cart_item->product->price }} DT</td>
-                                <td>
+                                <td class="d-flex gap-1 justify-content-end">
                                     <form action="{{ route('cart.update', $cart_item->id) }}" method="POST"
                                         class="d-inline">
                                         @csrf

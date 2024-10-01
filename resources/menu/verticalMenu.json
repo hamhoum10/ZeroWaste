@@ -40,6 +40,21 @@
       ]
     },
     {
+      "menuHeader": "Admin"
+    },
+    {
+      "name": "Products",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/admin/products"
+    },
+    {
+      "name": "Orders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/orders"
+    },
+    {
       "menuHeader": "Pages"
     },
     {
@@ -47,6 +62,12 @@
       "icon": "menu-icon bx bx-store",
       "slug": "pages-account-settings",
       "url": "/products"
+    },
+    {
+      "name": "MyOrders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/myOrders"
     },
     {
       "name": "Account Settings",

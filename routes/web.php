@@ -19,18 +19,27 @@ use App\Http\Controllers\OrderController;
 
 $controller_path = 'App\Http\Controllers';
 
-Route::resource('products', ProductController::class);
-
+// Products routes
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('products', [ProductController::class, 'store'])->name('products.store');
+Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('admin/products', [ProductController::class, 'admin'])->name('products.admin');
 // Cart routes
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
-
 // Order routes
 Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('myOrders', [OrderController::class, 'myOrders'])->name('orders.myOrders');
 Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
-Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('myOrders/{id}', [OrderController::class, 'showOwned'])->name('orders.showOwned');
+Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
 
 // Main Page Route
 Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
