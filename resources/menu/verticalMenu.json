@@ -43,6 +43,12 @@
       "menuHeader": "Pages"
     },
     {
+      "name": "Store",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/products"
+    },
+    {
       "name": "Account Settings",
       "icon": "menu-icon tf-icons bx bx bx-dock-top",
       "slug": "pages-account-settings",

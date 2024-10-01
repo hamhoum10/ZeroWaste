@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 $controller_path = 'App\Http\Controllers';
+
+Route::resource('products', ProductController::class);
+
+// Cart routes
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+Route::put('cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+// Order routes
+Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 // Main Page Route
 Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
