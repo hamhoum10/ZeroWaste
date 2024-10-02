@@ -11,21 +11,22 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-      Schema::create('best_practices', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->text('content');
-        $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-        $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
-        $table->string('tags')->nullable();
-        $table->timestamps();
-      });
+  public function up()
+  {
+    Schema::create('best_practices', function (Blueprint $table) {
+      $table->id();
+      $table->string('title');
+      $table->text('contents');
+      $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+      // Remove the author_id line
+      // $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
+      $table->string('tags')->nullable();
+      $table->timestamps();
+    });
+  }
 
-    }
 
-    /**
+  /**
      * Reverse the migrations.
      *
      * @return void
