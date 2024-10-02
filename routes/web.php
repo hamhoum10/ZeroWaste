@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\WasteCategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +81,11 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 
 // tables
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
+
+//homhoum test
+
+
+Route::resource('wastecategories', WasteCategoryController::class);
+use App\Http\Controllers\RecyclingCenterController;
+Route::resource('recycling-centers', RecyclingCenterController::class);
+
