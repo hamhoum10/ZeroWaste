@@ -9,7 +9,7 @@ class WasteCategoryController extends Controller
 {
   public function index()
   {
-    $wastecategories = WasteCategory::all();
+    $wastecategories = WasteCategory::paginate(5);
     return view('wastecategories.index', compact('wastecategories'));
   }
 

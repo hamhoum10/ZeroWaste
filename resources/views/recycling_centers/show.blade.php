@@ -7,7 +7,7 @@
 
   <div class="container-fluid p-0">
     <div class="row vh-100">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="card h-100">
           <div class="card-header">
             <h3 class="card-title">{{ ucwords($recyclingCenter->name) }} Recycling Center</h3>
@@ -50,13 +50,15 @@
             </dl>
           </div>
 
-          <!-- Map -->
-          <div id="map" style="height: 400px;"></div>
-
           <div class="card-footer text-end">
             <a href="{{ route('recycling-centers.index') }}" class="btn btn-secondary">Back</a>
           </div>
         </div>
+      </div>
+
+      <!-- Map Column -->
+      <div class="col-md-6">
+        <div id="map" style="height: 100%;"></div>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@ class RecyclingCenterController extends Controller
 {
   public function index()
   {
-    $recyclingCenters = RecyclingCenter::all();
+    $recyclingCenters = RecyclingCenter::with('wasteCategory')->paginate(5);
     return view('recycling_centers.index', compact('recyclingCenters'));
   }
 
