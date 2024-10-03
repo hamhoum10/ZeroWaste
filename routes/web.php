@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\dashboard\Analytics;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\authentications\RegisterBasic;
+use App\Http\Controllers\authentications\LoginBasic;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,8 +45,13 @@ Route::get('myOrders/{id}', [OrderController::class, 'showOwned'])->name('orders
 Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
 Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
 
+// Admin Dashboard Route
+Route::get('/admin/statistics', [StatisticsController::class, 'index'])->name('admin-statistics');
+
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::middleware(['auth'])->group(function () {
+  Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+});
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -59,9 +68,17 @@ Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->na
 Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
 
 // authentication
-Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic');
-Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
-Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
+//Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic');
+//Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
+//Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
+Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+Route::post('/auth/register-basic', [RegisterBasic::class, 'register'])->name('register-basic');
+Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+Route::post('/auth/login-basic', [LoginBasic::class, 'login'])->name('login-basic');
+Route::post('/logout', function () {
+  Auth::logout(); // Log out the user
+  return redirect()->route('auth-login-basic'); // Redirect to the login page
+})->name('logout');
 
 // cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');
