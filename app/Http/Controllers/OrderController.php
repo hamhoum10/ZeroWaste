@@ -7,9 +7,15 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->only(['index', 'show', 'update', 'destroy']);
+        $this->middleware('role:user')->only(['myOrders', 'showOwned', 'store']);
+    }
 
     public function index()
     {
@@ -19,46 +25,42 @@ class OrderController extends Controller
 
     public function myOrders()
     {
-        $orders = Order::where('user_id', 1)->with('user')->get();
+        $orders = Order::where('user_id', Auth::user()->id)->with('user')->get();
         return view('marketplace.myOrders', compact('orders'));
     }
 
     public function show($id)
     {
         $orders = Order::with(relations: 'orderItems.product')->with('user')->get();
-        $order = Order::findOrFail($id); // This will throw a 404 if the product is not found
+        $order = Order::findOrFail($id);
 
-        // Return a view to display the product details, passing the product object
         return view('marketplace.order', compact('orders', 'order'));
     
     }
 
     public function showOwned($id)
     {
-        $orders = Order::with(relations: 'orderItems.product')->with('user')->get();
-        $order = Order::findOrFail($id); // This will throw a 404 if the product is not found
+        $orders = Order::where('user_id', Auth::user()->id)->with(relations: 'orderItems.product')->with('user')->get();
+        $order = Order::findOrFail($id);
 
-        // Return a view to display the product details, passing the product object
         return view('marketplace.myOrder', compact('orders', 'order'));
     
     }
 
     public function store(Request $request)
     {
-        $cart = Cart::with('cartItems.product')->where('user_id', 1)->first();
+        $cart = Cart::with('cartItems.product')->where('user_id', Auth::user()->id)->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
             return response()->json(['error' => 'Your cart is empty'], 400);
         }
 
-        // Create the order
         $order = Order::create([
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'total_price' => $cart->cartItems->sum(fn($item) => $item->product->price * $item->quantity),
             'status' => 'pending',
         ]);
 
-        // Create order items from cart items
         foreach ($cart->cartItems as $cartItem) {
             OrderItem::create(attributes: [
                 'order_id' => $order->id,
@@ -70,16 +72,13 @@ class OrderController extends Controller
             $product = Product::findOrFail($cartItem->product_id);
             $product->quantity -= $cartItem->quantity;
 
-            // Ensure quantity does not go below zero
             if ($product->quantity < 0) {
                 return response()->json(['error' => 'Insufficient product quantity for: ' . $product->name], 400);
             }
 
-            // Save the updated product
             $product->save();
         }
 
-        // Clear the cart
         $cart->delete();
         
         session()->flash('success', 'Ordered Successfully!');
@@ -98,7 +97,7 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        $order = Order::findOrFail($id); // This will throw a 404 if the product is not found
+        $order = Order::findOrFail($id);
         $order->delete();
 
         session()->flash('success', 'Successfully Removed!');

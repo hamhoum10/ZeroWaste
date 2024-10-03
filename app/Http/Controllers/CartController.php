@@ -6,20 +6,27 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->only([]);
+        $this->middleware('role:user')->only(['index', 'store', 'update', 'destroy']);
+    }
+
     public function index()
     {
-        $cart = Cart::with('cartItems.product')->where('user_id', 1)->first();
+        $cart = Cart::with('cartItems.product')->where('user_id', Auth::user()->id)->first();
         return view('marketplace.cart', compact('cart'));
     }
 
     public function store(Request $request)
     {
-        $cart = Cart::firstOrCreate(['user_id' => 1]);
+        $cart = Cart::firstOrCreate(['user_id' => Auth::user()->id]);
         CartItem::updateOrCreate(
             ['cart_id' => $cart->id, 'product_id' => $request->product_id],
             ['quantity' => $request->quantity]
@@ -28,7 +35,6 @@ class CartController extends Controller
         ->join('products', 'cart_items.product_id', '=', 'products.id')
         ->sum(DB::raw('cart_items.quantity * products.price'));
 
-        // Update the total price in the Cart
         $cart->total_price = $totalPrice;
         $cart->save();
         
@@ -39,13 +45,12 @@ class CartController extends Controller
 
     public function update(Request $request, CartItem $cartItem)
     {
-        $cart = Cart::firstOrCreate(['user_id' => 1]);
+        $cart = Cart::firstOrCreate(['user_id' => Auth::user()->id]);
         $cartItem->update(['quantity' => $request->quantity]);
         $totalPrice = CartItem::where('cart_id', $cart->id)
         ->join('products', 'cart_items.product_id', '=', 'products.id')
         ->sum(DB::raw('cart_items.quantity * products.price'));
 
-        // Update the total price in the Cart
         $cart->total_price = $totalPrice;
         $cart->save();
         error_log( $cart->id);

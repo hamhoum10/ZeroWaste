@@ -78,8 +78,8 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">{{ $user->name }}</span>
-                          <small class="text-muted">{{ $user->role }}</small>
+                          <span class="fw-semibold d-block">{{ $connectedUser->name }}</span>
+                          <small class="text-muted">{{ $connectedUser->role }}</small>
                         </div>
                       </div>
                     </a>

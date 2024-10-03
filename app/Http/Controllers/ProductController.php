@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->only(['admin', 'create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('role:user')->only(['index']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -47,13 +53,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('image_url')) {
-            $imageName = time() . '.' . $request->image_url->extension(); // Create a unique name for the image
-            $request->image_url->move(public_path('assets/img/products'), $imageName); // Move the image to the assets folder
+            $imageName = time() . '.' . $request->image_url->extension();
+            $request->image_url->move(public_path('assets/img/products'), $imageName);
         } else {
-            $imageName = null; // Handle the case where no image is uploaded
+            $imageName = null;
         }
     
-        // Create the product with the image name
         $product = Product::create(array_merge($request->all(), ['image_url' => $imageName]));
 
         session()->flash('success', 'Successfully Added!');
@@ -95,17 +100,13 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        $imageName = $product->image_url; // Use the existing image URL as default
+        $imageName = $product->image_url;
 
-        // Check if a new image has been uploaded
         if ($request->hasFile('image')) {
-            // Create a unique name for the new image
             $imageName = time() . '.' . $request->image->extension(); 
-            // Move the new image to the assets folder
             $request->image->move(public_path('assets/img/products'), $imageName);
         }
     
-        // Update the product with the request data, including the image URL
         $product->update(array_merge($request->all(), ['image_url' => $imageName]));
 
         session()->flash('success', 'Successfully Updated!');
@@ -125,7 +126,7 @@ class ProductController extends Controller
         if ($product->image_url) {
             $imagePath = public_path('assets/img/products/' . $product->image_url);
             if (file_exists($imagePath)) {
-                unlink($imagePath); // Delete the image file
+                unlink($imagePath);
             }
         }
         $product->delete();
