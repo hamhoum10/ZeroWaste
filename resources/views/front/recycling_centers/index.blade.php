@@ -159,13 +159,30 @@
   <script>
 
     // Initialize the map and set its view to the first recycling center's location (or a default location)
-    var map = L.map('map').setView([{{ $recyclingCenters->first()->latitude ?? 36.8065 }}, {{ $recyclingCenters->first()->longitude ?? 10.1815 }}], 10);
+    var map = L.map('map', {
+      minZoom: 2,  // Set minimum zoom level to prevent excessive zooming out
+      maxZoom: 15  // Optional: Set maximum zoom level (adjust as needed)
+    }).setView([{{ $recyclingCenters->first()->latitude ?? 36.8065 }}, {{ $recyclingCenters->first()->longitude ?? 10.1815 }}], 10);
 
     // Add a tile layer to the map (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    function formatDateTime(dateTime) {
+      if (!dateTime) return 'N/A'; // Return 'N/A' if dateTime is falsy
 
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true // Set to true for 12-hour format
+      };
+
+      // Create a new Date object and format it
+      return new Date(dateTime).toLocaleString('en-US', options);
+    }
     function updateDetails(center) {
       if (!center) {
         console.error('Center is undefined');
@@ -178,23 +195,23 @@
       document.getElementById('offcanvas-center-name').textContent = center.name || 'N/A';
       document.getElementById('offcanvas-center-address').textContent = center.address || 'N/A';
       document.getElementById('offcanvas-center-phone').textContent = center.phone || 'N/A';
-      document.getElementById('offcanvas-center-created').textContent = center.created_at || 'N/A';
-      document.getElementById('offcanvas-center-updated').textContent = center.updated_at || 'N/A';
+      document.getElementById('offcanvas-center-created').textContent = formatDateTime(center.created_at) || 'N/A';
+      document.getElementById('offcanvas-center-updated').textContent = formatDateTime(center.updated_at) || 'N/A';
 
       // Update waste category details
       if (center.waste_category) {
         const categoryDetails = `
-          <strong>${center.waste_category.name || 'N/A'}</strong><br>
-          <span>Description: ${center.waste_category.description || 'N/A'}</span><br>
-          <span>Created At: ${center.waste_category.created_at || 'N/A'}</span><br>
-          <span>Updated At: ${center.waste_category.updated_at || 'N/A'}</span>
-        `;
+      <strong>${center.waste_category.name || 'N/A'}</strong><br>
+      <span>Description: ${center.waste_category.description || 'N/A'}</span><br>
+      <span>Created At: ${formatDateTime(center.waste_category.created_at) || 'N/A'}</span><br>
+      <span>Updated At: ${formatDateTime(center.waste_category.updated_at) || 'N/A'}</span>
+    `;
 
         console.log('Waste Category:', center.waste_category); // Log the waste category data
         document.getElementById('offcanvas-center-category').innerHTML = `<a href="{{ url('wastecategories') }}/${center.waste_category.id}">${center.waste_category.name || 'N/A'}</a>`;
         document.getElementById('offcanvas-waste-description').innerHTML = categoryDetails;
-        document.getElementById('offcanvas-waste-created').textContent = center.waste_category.created_at || 'N/A';
-        document.getElementById('offcanvas-waste-updated').textContent = center.waste_category.updated_at || 'N/A';
+        document.getElementById('offcanvas-waste-created').textContent = formatDateTime(center.waste_category.created_at )|| 'N/A';
+        document.getElementById('offcanvas-waste-updated').textContent = formatDateTime(center.waste_category.updated_at) || 'N/A';
       } else {
         document.getElementById('offcanvas-center-category').textContent = 'N/A';
         document.getElementById('offcanvas-waste-description').textContent = 'N/A';
