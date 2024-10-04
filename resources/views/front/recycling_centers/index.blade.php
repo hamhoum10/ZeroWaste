@@ -51,12 +51,28 @@
     #search-results {
       list-style: none;
       padding: 0;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      display: none; /* Initial state hidden */
-      position: absolute; /* Position absolute for dropdown effect */
-      background: white; /* Background color to make it readable */
-      z-index: 1000; /* Ensure it appears above other elements */
+      margin-top: 100px;
+      border: 1px solid #ccc; /* Light border for separation */
+      display: none; /* Hidden by default */
+      position: absolute; /* For dropdown effect */
+      background: white; /* Background color */
+      z-index: 10009; /* Ensure it appears above other elements */
+      border-radius: 8px; /* Rounded corners for the dropdown */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    /* Individual search result item styling */
+    #search-results li {
+      padding: 10px 15px; /* Padding for each search item */
+      border-bottom: 1px solid #e0e0e0; /* Light border between items */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: background 0.3s, transform 0.2s; /* Smooth transitions */
+    }
+
+    /* Hover effect for each item */
+    #search-results li:hover {
+      background: #f8f8f8; /* Light background color on hover */
+      transform: scale(1.02); /* Slight scale effect on hover */
     }
 
     /* Search bar container styling */
@@ -69,13 +85,18 @@
 
   <div class="container-fluid p-0">
     <div class="row vh-100">
-      <!-- Search bar -->
-      <div class="col-md-4 search-container">
-        <input type="text" id="search-bar" placeholder="Search for recycling centers..." style="width: 100%; padding: 10px;"/>
-        <ul id="search-results"></ul>
-        <h5>Recent Searches</h5>
+      <div class="col-md-4 search-container d-flex align-items-center">
+        <select id="category-dropdown" class="form-select me-2" style="    min-width: 172px;flex: 1;">
+          <option value="">Select a category</option>
+          @foreach ($wasteCategories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+          @endforeach
+        </select>
+        <!-- Search bar -->
+        <input type="text" id="search-bar" class="form-control" placeholder="Search for recycling centers..." style="    min-width: 220px;flex: 2;"/>
         <ul id="recent-searches"></ul>
       </div>
+      <ul id="search-results"></ul>
 
       <!-- Map container -->
       <div id="map" class="col-md-8"></div>
@@ -185,6 +206,30 @@
       var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasDetails'));
       offcanvas.show();
     }
+    // Get the category dropdown element
+    var categoryDropdown = document.getElementById('category-dropdown');
+
+    // Event listener for category selection
+    categoryDropdown.addEventListener('change', function() {
+      const selectedCategoryId = this.value;
+
+      // Filter recycling centers based on the selected category
+      const filteredCenters = selectedCategoryId
+        ? recyclingCenters.filter(center => center.waste_category && center.waste_category.id == selectedCategoryId)
+        : recyclingCenters;
+
+      // Add markers for the filtered centers
+      addMarkers(filteredCenters);
+
+      // If there are filtered centers, fit the map to the bounds
+      if (filteredCenters.length > 0) {
+        const bounds = L.latLngBounds(filteredCenters.map(center => [center.latitude, center.longitude]));
+        map.fitBounds(bounds); // Adjust the map to fit the bounds of the filtered centers
+      } else {
+        // Optionally, reset the map view to the default location if no centers are found
+        map.setView([{{ $recyclingCenters->first()->latitude ?? 36.8065 }}, {{ $recyclingCenters->first()->longitude ?? 10.1815 }}], 10);
+      }
+    });
 
     // Recycling centers data
     var recyclingCenters = @json($recyclingCenters);
@@ -221,23 +266,26 @@
     var searchResults = document.getElementById('search-results');
     var recentSearchesList = document.getElementById('recent-searches');
 
+    // Search functionality
     searchBar.addEventListener('input', function() {
       const query = this.value.toLowerCase();
       searchResults.innerHTML = ''; // Clear previous results
       searchResults.style.display = 'none'; // Hide results initially
 
-      // Filter recycling centers
+      // Filter recycling centers by name and waste category
       recyclingCenters.forEach(function(center) {
-        if (center.name.toLowerCase().includes(query) && query) {
+        // Check if the center name or waste category matches the query
+        const categoryMatches = center.waste_category && center.waste_category.name.toLowerCase().includes(query);
+        if ((center.name.toLowerCase().includes(query) || categoryMatches) && query) {
           // Create a list item for each matching center
           var li = document.createElement('li');
-          li.textContent = center.name;
+          li.textContent = center.name + (categoryMatches ? ' (Category: ' + center.waste_category.name + ')' : '');
           li.style.padding = '5px';
           li.style.cursor = 'pointer';
           li.onclick = function() {
             console.log('Search Result Clicked:', center); // Log the center data
             updateDetails(center);
-            if(center.latitude && center.longitude) {
+            if (center.latitude && center.longitude) {
               map.setView([center.latitude, center.longitude], 17); // Zoom to the center
             } else {
               console.error('Invalid coordinates:', center.latitude, center.longitude); // Log error if coordinates are invalid
@@ -255,8 +303,11 @@
 
       if (searchResults.innerHTML) {
         searchResults.style.display = 'block'; // Show results if there are matches
+      } else {
+        searchResults.style.display = 'none'; // Ensure it hides if no results
       }
     });
+
     // Function to load recent searches from local storage
     function loadRecentSearches() {
       const storedSearches = localStorage.getItem('recentSearches');

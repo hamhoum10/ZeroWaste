@@ -57,9 +57,6 @@
         <input type="hidden" name="waste_category_id" id="waste_category_id" value="{{ $recyclingCenter->waste_category_id }}" required>
       </div>
 
-      <input type="hidden" name="waste_category_id" id="waste_category_id" value="{{ $recyclingCenter->waste_category_id }}" required>
-      </div>
-
       <!-- New Map Field -->
       <div id="map" style="height: 400px; margin-top: 20px;"></div>
       <input type="hidden" name="latitude" id="latitude" value="{{ $recyclingCenter->latitude }}" required>
@@ -70,6 +67,20 @@
   </div>
 
   <script>
+    // Dropdown selection handling
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const selectedValue = this.getAttribute('data-value');
+        const selectedText = this.innerText;
+
+        // Set the hidden input value
+        document.getElementById('waste_category_id').value = selectedValue;
+
+        // Update the dropdown button text
+        document.getElementById('selectedCategory').innerText = selectedText;
+      });
+    });
+
     // Initialize the map
     var map = L.map('map').setView([{{ $recyclingCenter->latitude }}, {{ $recyclingCenter->longitude }}], 13); // Center the map on the recycling center location
 
