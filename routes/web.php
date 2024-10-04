@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontOffice\RecyclingCenterControllerF;
 use App\Http\Controllers\WasteCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -88,4 +89,7 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 Route::resource('wastecategories', WasteCategoryController::class);
 use App\Http\Controllers\RecyclingCenterController;
 Route::resource('recycling-centers', RecyclingCenterController::class);
-
+Route::prefix('front')->name('front.')->group(function () {
+  Route::get('/recycling-centers', [RecyclingCenterControllerF::class, 'index'])->name('recycling-centers.index');
+  Route::get('/recycling-centers/{recyclingCenter}', [RecyclingCenterControllerF::class, 'show'])->name('recycling-centers.show');
+});
