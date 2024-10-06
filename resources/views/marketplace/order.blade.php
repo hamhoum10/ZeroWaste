@@ -12,7 +12,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="m-2">
-                <p>Total Price: {{ $order->total_price }}</p>
+                <p>Total Price: {{ $order->total_price }} DT</p>
                 @if ($order->status == 'pending')
                     <div class="btn-group">
                         <button type="button" class="btn btn-warning dropdown-toggle hide-arrow text-uppercase"

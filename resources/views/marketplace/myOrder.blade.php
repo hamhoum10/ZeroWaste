@@ -12,7 +12,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="m-2">
-                <p>Total Price: {{ $order->total_price }}</p>
+                <p>Total Price: {{ $order->total_price }} DT</p>
                 @if ($order->status == 'pending')
                     <span class="badge bg-label-warning me-1">{{ $order->status }}</span>
                 @elseif ($order->status == 'completed')

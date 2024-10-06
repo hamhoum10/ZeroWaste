@@ -72,20 +72,17 @@
                                     <strong>{{ $cart_item->product->name }}</strong>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control quantity-input" name="quantity"
-                                        value="{{ $cart_item->quantity }}" min="1" max={{ $cart_item->product->quantity }} style="width: 100px;"
-                                        data-cart-item-id="{{ $cart_item->id }}">
+                                    <form action="{{ route('cart.update', $cart_item->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="number" class="form-control quantity-input" name="quantity"
+                                            value="{{ $cart_item->quantity }}" min="1"
+                                            max={{ $cart_item->product->quantity }} style="width: 100px;"
+                                            data-cart-item-id="{{ $cart_item->id }}" onchange="this.form.submit()">
+                                    </form>
                                 </td>
                                 <td>{{ $cart_item->product->price }} DT</td>
                                 <td class="d-flex gap-1 justify-content-end">
-                                    <form action="{{ route('cart.update', $cart_item->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" class="form-control" name="quantity"
-                                            value="{{ $cart_item->quantity }}" id="hidden-quantity-{{ $cart_item->id }}">
-                                        <button type="submit" class="btn btn-md btn-primary">Update</button>
-                                    </form>
                                     <form action="{{ route('cart.destroy', $cart_item->id) }}" method="POST"
                                         class="d-inline">
                                         @csrf
@@ -112,7 +109,7 @@
                     <h3 class="card-text">{{ $cart->total_price ?? 0 }} DT</h3>
                     <form action="{{ route('orders.store') }}" method="POST">
                         @csrf
-                        <button class="btn btn-md btn-primary">Order</button>    
+                        <button class="btn btn-md btn-primary">Order</button>
                     </form>
                 </div>
             </div>
