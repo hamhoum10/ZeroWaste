@@ -24,7 +24,7 @@ class ProductController extends Controller
         return view('marketplace.products', compact('products'));
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,13 +52,13 @@ class ProductController extends Controller
         } else {
             $imageName = null; // Handle the case where no image is uploaded
         }
-    
+
         // Create the product with the image name
         $product = Product::create(array_merge($request->all(), ['image_url' => $imageName]));
 
         session()->flash('success', 'Successfully Added!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**
@@ -100,17 +100,17 @@ class ProductController extends Controller
         // Check if a new image has been uploaded
         if ($request->hasFile('image')) {
             // Create a unique name for the new image
-            $imageName = time() . '.' . $request->image->extension(); 
+            $imageName = time() . '.' . $request->image->extension();
             // Move the new image to the assets folder
             $request->image->move(public_path('assets/img/products'), $imageName);
         }
-    
+
         // Update the product with the request data, including the image URL
         $product->update(array_merge($request->all(), ['image_url' => $imageName]));
 
         session()->flash('success', 'Successfully Updated!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**

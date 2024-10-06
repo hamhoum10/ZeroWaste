@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\LoginBasic;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,9 +45,6 @@ Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show')
 Route::get('myOrders/{id}', [OrderController::class, 'showOwned'])->name('orders.showOwned');
 Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
 Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
-
-// Admin Dashboard Route
-Route::get('/admin/statistics', [StatisticsController::class, 'index'])->name('admin-statistics');
 
 // Main Page Route
 Route::middleware(['auth'])->group(function () {

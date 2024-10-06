@@ -30,7 +30,7 @@ class OrderController extends Controller
 
         // Return a view to display the product details, passing the product object
         return view('marketplace.order', compact('orders', 'order'));
-    
+
     }
 
     public function showOwned($id)
@@ -40,7 +40,7 @@ class OrderController extends Controller
 
         // Return a view to display the product details, passing the product object
         return view('marketplace.myOrder', compact('orders', 'order'));
-    
+
     }
 
     public function store(Request $request)
@@ -81,10 +81,10 @@ class OrderController extends Controller
 
         // Clear the cart
         $cart->delete();
-        
+
         session()->flash('success', 'Ordered Successfully!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
@@ -92,7 +92,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->status = $request->input('status');
         $order->save();
-    
+
         return response()->json(['success' => true]);
     }
 
@@ -103,6 +103,6 @@ class OrderController extends Controller
 
         session()->flash('success', 'Successfully Removed!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 }
