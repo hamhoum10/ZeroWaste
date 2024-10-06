@@ -18,6 +18,7 @@
 
   <ul class="menu-inner py-1">
     <?php $__currentLoopData = $menuData[0]->menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php if(isset($menu->role) && ($menu->role === $connectedUser->role || empty($menu->role))): ?>
 
     
 
@@ -68,6 +69,7 @@
       <?php echo $__env->make('layouts.sections.menu.submenu',['menu' => $menu->submenu], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <?php endif; ?>
     </li>
+    <?php endif; ?>
     <?php endif; ?>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </ul>

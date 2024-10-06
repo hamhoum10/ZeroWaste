@@ -18,6 +18,7 @@
 
   <ul class="menu-inner py-1">
     @foreach ($menuData[0]->menu as $menu)
+    @if (isset($menu->role) && ($menu->role === $connectedUser->role || empty($menu->role)))
 
     {{-- adding active and open class if child is active --}}
 
@@ -68,6 +69,7 @@
       @include('layouts.sections.menu.submenu',['menu' => $menu->submenu])
       @endisset
     </li>
+    @endif
     @endif
     @endforeach
   </ul>

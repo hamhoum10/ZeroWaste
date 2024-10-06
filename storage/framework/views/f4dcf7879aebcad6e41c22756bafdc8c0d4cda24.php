@@ -29,7 +29,7 @@
             <?php echo csrf_field(); ?>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email or username" autofocus>
+              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
             </div>
             <div class="mb-3 form-password-toggle">
               <label for="password" class="form-label">Password</label>

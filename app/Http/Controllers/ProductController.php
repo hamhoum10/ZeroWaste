@@ -30,7 +30,7 @@ class ProductController extends Controller
         return view('marketplace.products', compact('products'));
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,7 +63,7 @@ class ProductController extends Controller
 
         session()->flash('success', 'Successfully Added!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**
@@ -111,7 +111,7 @@ class ProductController extends Controller
 
         session()->flash('success', 'Successfully Updated!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     /**

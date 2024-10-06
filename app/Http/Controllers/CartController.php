@@ -37,10 +37,10 @@ class CartController extends Controller
 
         $cart->total_price = $totalPrice;
         $cart->save();
-        
+
         session()->flash('success', 'Successfully Added!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
     public function update(Request $request, CartItem $cartItem)
@@ -65,6 +65,6 @@ class CartController extends Controller
 
         session()->flash('success', 'Successfully Removed!');
 
-        return redirect()->back(); 
+        return redirect()->back();
     }
 }
