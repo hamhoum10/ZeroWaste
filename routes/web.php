@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\dashboard\Analytics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +48,12 @@ Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.
 Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
 
 // Main Page Route
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+  Route::get('/admin/user-logs', [AdminController::class, 'viewUserLogs'])
+    ->name('admin.user-logs');
 });
+
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -73,7 +77,9 @@ Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-
 Route::post('/auth/register-basic', [RegisterBasic::class, 'register'])->name('register-basic');
 Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
 Route::post('/auth/login-basic', [LoginBasic::class, 'login'])->name('login-basic');
-Route::post('/logout', function () {
+Route::post('/logout', function (\App\Services\LogService $logService) {
+  // Log the logout action
+  $logService->logAction('logout', 'User logged out');
   Auth::logout(); // Log out the user
   return redirect()->route('auth-login-basic'); // Redirect to the login page
 })->name('logout');

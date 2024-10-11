@@ -18,7 +18,7 @@ class CheckRole
   {
     error_log($role);
     if (!Auth::check() || Auth::user()->role !== $role) {
-      return redirect('/'); // Redirect if the user doesn't have the right role
+      return redirect('/orders'); // Redirect if the user doesn't have the right role
     }
 
     return $next($request);

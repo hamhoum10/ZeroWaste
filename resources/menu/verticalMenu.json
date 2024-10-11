@@ -26,6 +26,13 @@
       "role": "admin"
     },
     {
+      "name": "Logs",
+      "icon": "menu-icon bx bx-history",
+      "slug": "pages-account-settings",
+      "url": "/admin/user-logs",
+      "role": "admin"
+    },
+    {
       "menuHeader": "user",
       "role": "user"
     },
