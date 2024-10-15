@@ -16,6 +16,7 @@ class Event extends Model
         'location',
         'start_date',
         'end_date',
+        'event_image',
     ];
     protected $casts = [
         'start_date' => 'datetime',

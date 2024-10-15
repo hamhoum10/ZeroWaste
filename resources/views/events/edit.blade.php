@@ -3,7 +3,7 @@
 @section('content')
     <h1>Edit Event</h1>
 
-    <form action="{{ route('events.update', $event->event_id) }}" method="POST">
+    <form action="{{ route('events.update', $event->event_id) }}" method="POST"method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         
@@ -31,6 +31,19 @@
             <label for="end_date">End Date:</label>
             <input type="datetime-local" name="end_date" id="end_date" class="form-control" value="{{ $event->end_date }}" required>
         </div>
+         <!-- Display the current image -->
+         @if ($event->event_image)
+                    <div class="form-group">
+                        <label>Current Event Image:</label><br>
+                        <img src="{{ asset('images/' . $event->event_image) }}" alt="Event Image" class="img-fluid" width="200">
+                    </div>
+                @endif
+
+                <!-- Option to upload a new image -->
+                <div class="form-group">
+                    <label for="event_image">Change Event Image:</label>
+                    <input type="file" name="event_image" id="event_image" class="form-control" accept="image/*">
+                </div>
 
         <button type="submit" class="btn btn-primary">Update Event</button>
         <a href="{{ route('events.index') }}" class="btn btn-secondary">Back</a>
