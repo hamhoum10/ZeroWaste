@@ -18,12 +18,12 @@ return new class extends Migration
       $table->string('title');
       $table->text('contents');
       $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-      // Remove the author_id line
-      // $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
       $table->string('tags')->nullable();
+      $table->string('image')->nullable(); // Add image column
       $table->timestamps();
     });
   }
+
 
 
   /**

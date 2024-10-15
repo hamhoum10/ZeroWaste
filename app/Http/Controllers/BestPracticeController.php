@@ -27,19 +27,26 @@ class BestPracticeController extends Controller
       'contents' => 'required',
       'category_id' => 'required|exists:categories,id',
       'tags' => 'nullable|string',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
     ]);
+
+    // Handle the image upload if provided
+    $imagePath = null;
+    if ($request->hasFile('image')) {
+      $imagePath = $request->file('image')->store('best_practices', 'public');
+    }
 
     BestPractice::create([
       'title' => $request->title,
       'contents' => $request->contents,
       'category_id' => $request->category_id,
-      // Remove 'author_id' line
-      // 'author_id' => auth()->id(),
       'tags' => $request->tags,
+      'image' => $imagePath, // Save the image path in the database
     ]);
 
     return redirect()->route('best_practices.index')->with('success', 'Best Practice added successfully.');
   }
+
 
 
   public function show(BestPractice $bestPractice)

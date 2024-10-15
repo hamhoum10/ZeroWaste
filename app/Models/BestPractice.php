@@ -9,7 +9,7 @@ class BestPractice extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['title', 'contents', 'category_id', 'tags'];
+  protected $fillable = ['title', 'contents', 'category_id', 'tags', 'image'];
 
   // Define relationships
   public function category() {

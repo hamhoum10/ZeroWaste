@@ -10,7 +10,7 @@
           <h5 class="mb-0">Add New Best Practice</h5>
         </div>
         <div class="card-body">
-          <form action="{{ route('best_practices.store') }}" method="POST">
+          <form action="{{ route('best_practices.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -38,8 +38,14 @@
               <input type="text" class="form-control" id="tags" name="tags" value="{{ old('tags') }}" placeholder="Enter Tags (comma separated)">
             </div>
 
+            <div class="mb-3">
+              <label class="form-label" for="image">Upload Image:</label>
+              <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+
         </div>
       </div>
     </div>
