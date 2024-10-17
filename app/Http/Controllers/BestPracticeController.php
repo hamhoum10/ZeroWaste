@@ -8,11 +8,25 @@ use Illuminate\Http\Request;
 
 class BestPracticeController extends Controller
 {
-  public function index()
-  {
-    $bestPractices = BestPractice::with('category', 'author')->paginate(10);
-    return view('best_practices.index', compact('bestPractices'));
-  }
+    public function index(Request $request)
+    {
+        $search = $request->input('search'); // Get the search input
+        $query = BestPractice::with('category', 'author');
+
+        // If there's a search term, filter the best practices
+        if ($search) {
+            $query->where('title', 'like', "%{$search}%")
+                ->orWhere('tags', 'like', "%{$search}%")
+                ->orWhereHas('category', function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+        }
+
+        $bestPractices = $query->paginate(10);
+        return view('best_practices.index', compact('bestPractices', 'search')); // Pass search term to the view
+    }
+
+
 
   public function create()
   {
@@ -44,10 +58,8 @@ class BestPracticeController extends Controller
       'image' => $imagePath, // Save the image path in the database
     ]);
 
-    return redirect()->route('best_practices.index')->with('success', 'Best Practice added successfully.');
+    return redirect()->route('back_office.best_practices.index')->with('success', 'Best Practice added successfully.');
   }
-
-
 
   public function show(BestPractice $bestPractice)
   {
@@ -67,21 +79,45 @@ class BestPracticeController extends Controller
       'contents' => 'required',
       'category_id' => 'required|exists:categories,id',
       'tags' => 'nullable|string',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
     ]);
+
+    // Handle the image upload if provided
+    $imagePath = $bestPractice->image; // Keep existing image path by default
+    if ($request->hasFile('image')) {
+      // Delete the old image if it exists
+      if ($bestPractice->image) {
+        \Storage::disk('public')->delete($bestPractice->image);
+      }
+      $imagePath = $request->file('image')->store('best_practices', 'public');
+    }
 
     $bestPractice->update([
       'title' => $request->title,
       'contents' => $request->contents,
       'category_id' => $request->category_id,
       'tags' => $request->tags,
+      'image' => $imagePath, // Update the image path
     ]);
 
-    return redirect()->route('best_practices.index')->with('success', 'Best Practice updated successfully.');
+    // Update the redirect route
+    return redirect()->route('back_office.best_practices.index')->with('success', 'Best Practice updated successfully.');
   }
 
   public function destroy(BestPractice $bestPractice)
   {
     $bestPractice->delete();
-    return redirect()->route('best_practices.index')->with('success', 'Best Practice deleted successfully.');
+    return redirect()->route('back_office.best_practices.index')->with('success', 'Best Practice deleted successfully.');
   }
+  public function frontOfficeIndex()
+  {
+    $bestPractices = BestPractice::with('category')->paginate(10);
+    return view('best_practices.front_office', compact('bestPractices')); // Update the view path
+  }
+  public function frontOfficeShow(BestPractice $bestPractice)
+  {
+    return view('best_practices.front_office_view', compact('bestPractice'));
+  }
+
+
 }
