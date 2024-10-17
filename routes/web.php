@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FrontOfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +86,7 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 
 Route::resource('posts', PostController::class);
 Route::resource('events', EventController::class);
+// Front office routes for events
+Route::get('/fevents', [FrontOfficeController::class, 'index'])->name('front.index');
+Route::get('/fevents/{id}', [FrontOfficeController::class, 'show'])->name('front.show');
 
