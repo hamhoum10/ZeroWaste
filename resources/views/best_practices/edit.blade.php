@@ -1,3 +1,9 @@
+@php
+  $isNavbar = false;
+  $isMenu = false;
+  $navbarHideToggle = false;
+@endphp
+
 @extends('layouts/contentNavbarLayout')
 
 @section('content')
@@ -12,13 +18,16 @@
           <h5 class="mb-0">Edit Best Practice</h5>
         </div>
         <div class="card-body">
-          <form action="{{ route('best_practices.update', $bestPractice->id) }}" method="POST">
+          <form action="{{ route('back_office.best_practices.update', $bestPractice->id) }}"
+                method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
               <label class="form-label" for="title">Title:</label>
-              <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $bestPractice->title) }}" required placeholder="Enter Title">
+              <input type="text" class="form-control" id="title" name="title"
+                     value="{{ old('title', $bestPractice->title) }}"
+                     required placeholder="Enter Title">
               @error('title')
               <div class="text-danger">{{ $message }}</div>
               @enderror
@@ -26,7 +35,8 @@
 
             <div class="mb-3">
               <label class="form-label" for="contents">Contents:</label>
-              <textarea class="form-control" id="contents" name="contents" required placeholder="Enter Contents">{{ old('contents', $bestPractice->contents) }}</textarea>
+              <textarea class="form-control" id="contents" name="contents"
+                        required placeholder="Enter Contents">{{ old('contents', $bestPractice->contents) }}</textarea>
               @error('contents')
               <div class="text-danger">{{ $message }}</div>
               @enderror
@@ -36,7 +46,8 @@
               <label class="form-label" for="category_id">Category:</label>
               <select class="form-select" id="category_id" name="category_id" required>
                 @foreach ($categories as $category)
-                  <option value="{{ $category->id }}" {{ $category->id == $bestPractice->category_id ? 'selected' : '' }}>
+                  <option value="{{ $category->id }}"
+                    {{ $category->id == $bestPractice->category_id ? 'selected' : '' }}>
                     {{ $category->name }}
                   </option>
                 @endforeach
@@ -48,8 +59,23 @@
 
             <div class="mb-3">
               <label class="form-label" for="tags">Tags:</label>
-              <input type="text" class="form-control" id="tags" name="tags" value="{{ old('tags', $bestPractice->tags) }}" placeholder="Enter Tags">
+              <input type="text" class="form-control" id="tags" name="tags"
+                     value="{{ old('tags', $bestPractice->tags) }}" placeholder="Enter Tags">
               @error('tags')
+              <div class="text-danger">{{ $message }}</div>
+              @enderror
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="image">Image:</label>
+              <input type="file" class="form-control" id="image" name="image">
+              @if ($bestPractice->image)
+                <div class="mt-2">
+                  <img src="{{ asset('storage/' . $bestPractice->image) }}"
+                       alt="Current Image" style="max-width: 200px; height: auto;">
+                </div>
+              @endif
+              @error('image')
               <div class="text-danger">{{ $message }}</div>
               @enderror
             </div>

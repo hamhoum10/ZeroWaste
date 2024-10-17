@@ -1,3 +1,9 @@
+@php
+  $isNavbar = false;
+  $isMenu = false;
+  $navbarHideToggle = false;
+@endphp
+
 @extends('layouts/contentNavbarLayout')
 
 @section('content')
@@ -10,7 +16,7 @@
           <h5 class="mb-0">Add New Best Practice</h5>
         </div>
         <div class="card-body">
-          <form action="{{ route('best_practices.store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('back_office.best_practices.store') }}" method="POST" enctype="multipart/form-data"> <!-- Change here -->
             @csrf
 
             <div class="mb-3">
@@ -45,7 +51,6 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-
         </div>
       </div>
     </div>

@@ -81,6 +81,22 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
 
 
-Route::resource('best_practices', BestPracticeController::class);
+Route::prefix('best-practices-BackOffice')->group(function () {
+  Route::resource('best_practices', BestPracticeController::class)->names([
+    'index' => 'back_office.best_practices.index',
+    'create' => 'back_office.best_practices.create',
+    'store' => 'back_office.best_practices.store',
+    'show' => 'back_office.best_practices.show',
+    'edit' => 'back_office.best_practices.edit',
+    'update' => 'back_office.best_practices.update',
+    'destroy' => 'back_office.best_practices.destroy',
+  ]);
+});
+
+
+Route::get('/best-practices', [BestPracticeController::class, 'frontOfficeIndex'])->name('best_practices.front_office');
+Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'frontOfficeShow'])->name('best_practices.show');
+
+
 
 Route::resource('categories', CategoryController::class);
