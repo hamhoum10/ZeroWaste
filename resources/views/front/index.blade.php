@@ -1,10 +1,4 @@
-@extends('layouts/contentNavbarLayout')  <!-- Assuming you have a front office layout -->
-@php
-$isNavbar = false;
-
-$isMenu = false;
-$navbarHideToggle = false;
-@endphp
+@extends('layouts/front')  <!-- Assuming you have a front office layout -->
 @section('content')
 <div class="container my-5">
     <h1>Upcoming Events</h1>

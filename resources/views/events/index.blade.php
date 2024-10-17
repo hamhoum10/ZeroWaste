@@ -1,5 +1,8 @@
 @extends('layouts/contentNavbarLayout')
+@php
+$isNavbar = true;
 
+@endphp
 @section('content')
     <h1>Events</h1>
     <a href="{{ route('events.create') }}" class="btn btn-primary">Create New Event</a>

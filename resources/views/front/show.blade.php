@@ -1,4 +1,5 @@
-@extends('layouts/contentNavbarLayout')  <!-- Assuming you have a front office layout -->
+@extends('layouts/front')  <!-- Assuming you have a front office layout -->
+
 
 @section('content')
 <div class="container my-5">
