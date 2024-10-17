@@ -25,7 +25,7 @@
                             <a href="{{ route('front.show', $event->event_id) }}" class="btn btn-primary">View Event</a>
                             
                             <!-- Join Button -->
-                            <a class="btn btn-success mt-2">Join Event</a>
+                            <a class="btn btn-success ">Join Event</a>
                         </div>
                     </div>
                 </div>

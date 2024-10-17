@@ -16,6 +16,7 @@
             <p><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y, H:i') }}</p>
             <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y, H:i') }}</p>
             <a href="{{ route('front.index') }}" class="btn btn-secondary">Back to Events</a>
+            <a class="btn btn-success ">Join Event</a>
         </div>
     </div>
 </div>
