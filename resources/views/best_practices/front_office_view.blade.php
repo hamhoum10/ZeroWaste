@@ -1,6 +1,6 @@
-  @extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
-  @section('content')
+@section('content')
     <div class="container my-5">
       <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6"> <!-- Wider layout -->

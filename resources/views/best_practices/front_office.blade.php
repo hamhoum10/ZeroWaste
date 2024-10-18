@@ -1,9 +1,15 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('content')
   <div class="container my-5">
     <h1 class="mb-4 text-center">Best Practices</h1>
-
+    <!-- Search form -->
+    <form method="GET" action="{{ route('back_office.best_practices.index') }}" class="mb-4">
+      <div class="input-group">
+        <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="Search Best Practices">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </div>
+    </form>
     <div class="row">
       @foreach ($bestPractices as $bestPractice)
         <div class="col-md-6 col-lg-4 mb-4"> <!-- Changed to mb-4 for better spacing -->

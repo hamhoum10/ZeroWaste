@@ -10,8 +10,9 @@
   <div class="container my-5">
     <h1 class="mb-4 text-center">Best Practices Guide</h1>
 
-    <!-- Create button -->
-    <div class="text-end mb-4">
+    <!-- Buttons: Create New Best Practice & Manage Categories -->
+    <div class="d-flex justify-content-end mb-4">
+      <a href="{{ route('categories.index') }}" class="btn btn-secondary me-2">Manage Categories</a>
       <a href="{{ route('back_office.best_practices.create') }}" class="btn btn-primary">
         Create New Best Practice
       </a>
