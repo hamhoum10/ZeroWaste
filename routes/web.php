@@ -10,6 +10,7 @@ use App\Http\Controllers\dashboard\Analytics;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+
 //use App\Http\Controllers\PostController;
 //use App\Http\Controllers\EventController;
 
@@ -18,6 +19,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\LoginBasic;
+
+
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BestPracticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +138,7 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 // tables
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
 
+
 //homhoum test
 
 
@@ -143,3 +149,25 @@ Route::prefix('front')->name('front.')->group(function () {
   Route::get('/recycling-centers', [RecyclingCenterControllerF::class, 'index'])->name('recycling-centers.index');
   Route::get('/recycling-centers/{recyclingCenter}', [RecyclingCenterControllerF::class, 'show'])->name('recycling-centers.show');
 });
+
+
+Route::prefix('best-practices-BackOffice')->group(function () {
+  Route::resource('best_practices', BestPracticeController::class)->names([
+    'index' => 'back_office.best_practices.index',
+    'create' => 'back_office.best_practices.create',
+    'store' => 'back_office.best_practices.store',
+    'show' => 'back_office.best_practices.show',
+    'edit' => 'back_office.best_practices.edit',
+    'update' => 'back_office.best_practices.update',
+    'destroy' => 'back_office.best_practices.destroy',
+  ]);
+});
+
+
+Route::get('/best-practices', [BestPracticeController::class, 'frontOfficeIndex'])->name('best_practices.front_office');
+Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'frontOfficeShow'])->name('best_practices.show');
+
+
+
+Route::resource('categories', CategoryController::class);
+
