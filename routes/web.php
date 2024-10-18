@@ -1,10 +1,23 @@
 <?php
 
+
 use App\Http\Controllers\FrontOffice\RecyclingCenterControllerF;
 use App\Http\Controllers\WasteCategoryController;
+
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\dashboard\Analytics;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\EventController;
+//use App\Http\Controllers\PostController;
+//use App\Http\Controllers\EventController;
+
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\authentications\RegisterBasic;
+use App\Http\Controllers\authentications\LoginBasic;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +32,35 @@ use App\Http\Controllers\EventController;
 
 $controller_path = 'App\Http\Controllers';
 
+// Products routes
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('products', [ProductController::class, 'store'])->name('products.store');
+Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('admin/products', [ProductController::class, 'admin'])->name('products.admin');
+// Cart routes
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+Route::put('cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
+// Order routes
+Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('myOrders', [OrderController::class, 'myOrders'])->name('orders.myOrders');
+Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('myOrders/{id}', [OrderController::class, 'showOwned'])->name('orders.showOwned');
+Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
+
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+  Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+  Route::get('/admin/user-logs', [AdminController::class, 'viewUserLogs'])
+    ->name('admin.user-logs');
+});
+
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -37,9 +77,19 @@ Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->na
 Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
 
 // authentication
-Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic');
-Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
-Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
+//Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic');
+//Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
+//Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
+Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+Route::post('/auth/register-basic', [RegisterBasic::class, 'register'])->name('register-basic');
+Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+Route::post('/auth/login-basic', [LoginBasic::class, 'login'])->name('login-basic');
+Route::post('/logout', function (\App\Services\LogService $logService) {
+  // Log the logout action
+  $logService->logAction('logout', 'User logged out');
+  Auth::logout(); // Log out the user
+  return redirect()->route('auth-login-basic'); // Redirect to the login page
+})->name('logout');
 
 // cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');

@@ -1,10 +1,58 @@
 {
   "menu": [
     {
+      "menuHeader": "admin",
+      "role": "admin"
+    },
+    {
       "url": "/",
       "name": "Dashboard",
       "icon": "menu-icon tf-icons bx bx-home-circle",
-      "slug": "dashboard-analytics"
+      "slug": "dashboard-analytics",
+      "role": "admin"
+    },
+    {
+      "name": "Products",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/admin/products",
+      "role": "admin"
+    },
+    {
+      "name": "Orders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/orders",
+      "role": "admin"
+    },
+    {
+      "name": "Logs",
+      "icon": "menu-icon bx bx-history",
+      "slug": "pages-account-settings",
+      "url": "/admin/user-logs",
+      "role": "admin"
+    },
+    {
+      "menuHeader": "user",
+      "role": "user"
+    },
+    {
+      "name": "Store",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/products",
+      "role": "user"
+    },
+    {
+      "name": "MyOrders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/myOrders",
+      "role": "user"
+    },
+    {
+      "menuHeader": "Pages",
+      "role": ""
     },
     {
       "name": "Layouts",
@@ -37,10 +85,8 @@
           "slug": "layouts-blank",
           "target": "_blank"
         }
-      ]
-    },
-    {
-      "menuHeader": "Pages"
+      ],
+      "role": ""
     },
     {
       "name": "Account Settings",
@@ -62,7 +108,8 @@
           "name": "Connections",
           "slug": "pages-account-settings-connections"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "name": "Authentications",
@@ -87,7 +134,8 @@
           "slug": "auth-forgot-password-basic",
           "target": "_blank"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "name": "Misc",
@@ -106,16 +154,19 @@
           "slug": "pages-misc-under-maintenance",
           "target": "_blank"
         }
-      ]
+      ],
+      "role": ""
     },
     {
-      "menuHeader": "Components"
+      "menuHeader": "Components",
+      "role": ""
     },
     {
       "name": "Cards",
       "icon": "menu-icon tf-icons bx bx-collection",
       "slug": "cards-basic",
-      "url": "/cards/basic"
+      "url": "/cards/basic",
+      "role": ""
     },
     {
       "name": "User interface",
@@ -217,7 +268,8 @@
           "name": "Typography",
           "slug": "ui-typography"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "name": "Extended UI",
@@ -234,16 +286,19 @@
           "name": "Text Divider",
           "slug": "extended-ui-text-divider"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "url": "icons/boxicons",
       "icon": "menu-icon tf-icons bx bx-crown",
       "name": "Boxicons",
-      "slug": "icons-boxicons"
+      "slug": "icons-boxicons",
+      "role": ""
     },
     {
-      "menuHeader": "Forms & Tables"
+      "menuHeader": "Forms & Tables",
+      "role": ""
     },
     {
       "name": "Form Elements",
@@ -260,7 +315,8 @@
           "name": "Input groups",
           "slug": "forms-input-groups"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "name": "Form Layouts",
@@ -277,30 +333,35 @@
           "name": "Horizontal Form",
           "slug": "form-layouts-horizontal"
         }
-      ]
+      ],
+      "role": ""
     },
     {
       "url": "tables/basic",
       "icon": "menu-icon tf-icons bx bx-table",
       "name": "Tables",
-      "slug": "tables-basic"
+      "slug": "tables-basic",
+      "role": ""
     },
     {
-      "menuHeader": "Misc"
+      "menuHeader": "Misc",
+      "role": ""
     },
     {
       "url": "https://themeselection.com/support/",
       "icon": "menu-icon tf-icons bx bx-support",
       "name": "Support",
       "slug": "support",
-      "target": "_blank"
+      "target": "_blank",
+      "role": ""
     },
     {
       "url": "https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/laravel-introduction.html",
       "icon": "menu-icon tf-icons bx bx-file",
       "name": "Documentation",
       "slug": "documentation",
-      "target": "_blank"
+      "target": "_blank",
+      "role": ""
     }
   ]
 }
