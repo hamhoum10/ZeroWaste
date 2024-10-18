@@ -59,7 +59,7 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">Total Orders</span>
-              <h3 class="card-title mb-2">{{$totalOrders}}</h3>
+              <h3 class="card-title mb-2">{{$totalOrders ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +72.80%</small>
             </div>
           </div>
@@ -83,7 +83,7 @@
                 </div>
               </div>
               <span>Sales</span>
-              <h3 class="card-title text-nowrap mb-1">${{$totalRevenue}}</h3>
+              <h3 class="card-title text-nowrap mb-1">${{$totalRevenue ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.42%</small>
             </div>
           </div>
@@ -164,7 +164,7 @@
                 </div>
               </div>
               <span class="d-block mb-1">Total Users</span>
-              <h3 class="card-title text-nowrap mb-2">{{$totalUsers}}</h3>
+              <h3 class="card-title text-nowrap mb-2">{{$totalUsers ?? 0}}</h3>
               <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-alt'></i> -14.82%</small>
             </div>
           </div>
@@ -188,7 +188,7 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">Total Products</span>
-              <h3 class="card-title mb-2">{{$totalProducts}}</h3>
+              <h3 class="card-title mb-2">{{$totalProducts ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.14%</small>
             </div>
           </div>

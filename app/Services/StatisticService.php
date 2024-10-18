@@ -13,11 +13,11 @@ class StatisticService
   // Method to update all statistics at once
   public function updateAllStatistics($type = 'daily')
   {
-    // Calculate all the required statistics
-    $totalUsers = User::count();
-    $totalOrders = Order::count();
-    $totalRevenue = Order::sum('total_price');
-    $totalProducts = Product::count();
+    // Calculate all the required statistics, set to 0 if empty
+    $totalUsers = User::whereDate('created_at', Carbon::today())->count() ?? 0;
+    $totalOrders = Order::whereDate('created_at', Carbon::today())->count() ?? 0;
+    $totalRevenue = Order::whereDate('created_at', Carbon::today())->sum('total_price') ?? 0;
+    $totalProducts = Product::whereDate('created_at', Carbon::today())->count() ?? 0;
 
     // Save each statistic using the saveStatistic method
     $this->saveStatistic($type, 'total_users', $totalUsers);
