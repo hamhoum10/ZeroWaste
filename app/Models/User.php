@@ -60,4 +60,10 @@ class User extends Authenticatable
   {
     return $this->hasOne(Cart::class);
   }
+
+
+  public function likedTips()
+  {
+    return $this->belongsToMany(RecyclingTip::class, 'tip_likes');
+  }
 }

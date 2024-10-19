@@ -1,7 +1,9 @@
 <?php
 
 
+use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\FrontOffice\RecyclingCenterControllerF;
+use App\Http\Controllers\RecyclingTipController;
 use App\Http\Controllers\WasteCategoryController;
 
 use App\Http\Controllers\Admin\StatisticsController;
@@ -64,6 +66,39 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
   Route::get('/admin/user-logs', [AdminController::class, 'viewUserLogs'])
     ->name('admin.user-logs');
+});
+
+// Tips & Challenges Routes
+Route::middleware(['auth'])->group(function () {
+  // Front office routes (user)
+  Route::get('/my-recycling-tips', [RecyclingTipController::class, 'myTips'])->name('recycling-tips.my-tips');
+  Route::get('/recycling-tips', [RecyclingTipController::class, 'index'])->name('recycling-tips.index');
+  Route::post('/recycling-tips/like/{id}', [RecyclingTipController::class, 'like'])->name('recycling-tips.like');
+  Route::get('/recycling-tips/create', [RecyclingTipController::class, 'create'])->name('recycling-tips.create');
+  Route::post('/recycling-tips/store', [RecyclingTipController::class, 'store'])->name('recycling-tips.store');
+  Route::get('/recycling-tips/edit/{id}', [RecyclingTipController::class, 'edit'])->name('recycling-tips.edit');
+  Route::put('/recycling-tips/update/{id}', [RecyclingTipController::class, 'update'])->name('recycling-tips.update');
+  Route::delete('/recycling-tips/delete/{id}', [RecyclingTipController::class, 'destroy'])->name('recycling-tips.delete');
+
+  Route::get('/challenges', [ChallengeController::class, 'index'])->name('challenges.index');
+  Route::post('/challenges/participate/{id}', [ChallengeController::class, 'participate'])->name('challenges.participate');
+  Route::post('/challenges/leave/{id}', [ChallengeController::class, 'leave'])->name('challenges.leave');
+  Route::post('/challenges/suggest', [ChallengeController::class, 'suggest'])->name('challenges.suggest');
+
+  // Back office routes (admin)
+  Route::middleware(['role:admin'])->group(function () {
+    Route::get('/admin/recycling-tips/pending', [RecyclingTipController::class, 'pendingTips'])->name('admin.recycling-tips.pending');
+    Route::post('/admin/recycling-tips/approve/{id}', [RecyclingTipController::class, 'approveTip'])->name('admin.recycling-tips.approve');
+    Route::post('/admin/recycling-tips/reject/{id}', [RecyclingTipController::class, 'rejectTip'])->name('admin.recycling-tips.reject');
+
+    Route::get('/admin/challenges', [ChallengeController::class, 'adminIndex'])->name('admin.challenges.index');
+    Route::get('/admin/challenges/create', [ChallengeController::class, 'create'])->name('admin.challenges.create');
+    Route::post('/admin/challenges/store', [ChallengeController::class, 'store'])->name('admin.challenges.store');
+    Route::get('/admin/challenges/edit/{id}', [ChallengeController::class, 'edit'])->name('admin.challenges.edit');
+    Route::post('/admin/challenges/update/{id}', [ChallengeController::class, 'update'])->name('admin.challenges.update');
+    Route::post('/admin/challenges/delete/{id}', [ChallengeController::class, 'destroy'])->name('admin.challenges.delete');
+  });
+
 });
 
 
@@ -143,7 +178,9 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 
 
 Route::resource('wastecategories', WasteCategoryController::class);
+
 use App\Http\Controllers\RecyclingCenterController;
+
 Route::resource('recycling-centers', RecyclingCenterController::class);
 Route::prefix('front')->name('front.')->group(function () {
   Route::get('/recycling-centers', [RecyclingCenterControllerF::class, 'index'])->name('recycling-centers.index');
@@ -166,7 +203,6 @@ Route::prefix('best-practices-BackOffice')->group(function () {
 
 Route::get('/best-practices', [BestPracticeController::class, 'frontOfficeIndex'])->name('best_practices.front_office');
 Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'frontOfficeShow'])->name('best_practices.show');
-
 
 
 Route::resource('categories', CategoryController::class);
