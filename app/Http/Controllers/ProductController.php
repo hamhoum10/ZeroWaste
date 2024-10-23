@@ -18,9 +18,21 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $query = Product::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        error_log("skouzaaaaaaaaaa");
+        error_log($request->sort);
+        error_log($request->search);
+        if ($request->has('sort') && !empty($request->sort)) {
+            $sort = explode(',', $request->sort); // ['name', 'asc']
+            $query->orderBy($sort[0], $sort[1]);
+        }
+
+        $products = $query->get();
         return view('marketplace.store', compact('products'));
     }
 

@@ -20,6 +20,10 @@
                 toastList.forEach(toast => toast.show());
             @endif
         });
+
+        function submitForm() {
+            document.getElementById('filter-form').submit();
+        }
     </script>
 @endsection
 
@@ -40,7 +44,34 @@
 
     <!-- The rest of your content -->
 
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Products</span></h4>
+    <h4 class="fw-bold pt-3 mb-0"><span class="text-muted fw-light">Products</span></h4>
+
+    <nav class="layout-navbar my-4 container-fluid navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+        id="layout-navbar">
+        <div class="container-fluid">
+            <form action="{{ route('products.index') }}" method="GET" id="filter-form" class="d-flex justify-content-between w-100">
+                <div class="navbar-nav align-items-center">
+                    <div class="nav-item d-flex align-items-center">
+                        <i class="bx bx-search fs-4 lh-0"></i>
+                        <input type="text" name="search" class="form-control border-0 shadow-none"
+                            placeholder="Search..." aria-label="Search..." value="{{ request('search') }}">
+                    </div>
+                </div>
+
+                <div class="ms-3 w-25   ">
+                    <select class="form-select" name="sort" id="sort-select" aria-label="Sort by"
+                        onchange="submitForm()">
+                        <option value="" selected hidden>Sort by</option>
+                        <option value="name,asc" {{ request('sort') == 'name,asc' ? 'selected' : '' }}>Name ASC</option>
+                        <option value="name,desc" {{ request('sort') == 'name,desc' ? 'selected' : '' }}>Name DESC</option>
+                        <option value="price,asc" {{ request('sort') == 'price,asc' ? 'selected' : '' }}>Price ASC</option>
+                        <option value="price,desc" {{ request('sort') == 'price,desc' ? 'selected' : '' }}>Price DESC
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </nav>
 
     <!-- Examples -->
     <div class="row mb-5" data-masonry='{"percentPosition": true }'>
