@@ -107,7 +107,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Final Price</h5>
                     <h3 class="card-text">{{ $cart->total_price ?? 0 }} DT</h3>
-                    <form action="{{ route('orders.store') }}" method="POST">
+                    <form action="{{ route('orders.checkout') }}" method="POST">
                         @csrf
                         <button class="btn btn-md btn-primary">Order</button>
                     </form>

@@ -6,15 +6,21 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
         $this->middleware('role:admin')->only(['index', 'show', 'update', 'destroy']);
-        $this->middleware('role:user')->only(['myOrders', 'showOwned', 'store']);
+        $this->middleware('role:user')->only(['myOrders', 'showOwned', 'success', 'checkout']);
     }
 
     public function index()
@@ -47,7 +53,38 @@ class OrderController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function checkout(): RedirectResponse
+    {
+        Stripe::setApiKey(config('stripe.sk'));
+
+        $cart = Cart::with('cartItems.product')->where('user_id', Auth::user()->id)->first();
+
+        $lineItems = [];
+
+        foreach ($cart->cartItems as $cartItem) {
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => 'gbp',
+                    'product_data' => [
+                        'name' => $cartItem->product->name,
+                    ],
+                    'unit_amount' => $cartItem->product->price * 100,
+                ],
+                'quantity' => $cartItem->quantity,
+            ];
+        }
+
+        $session = Session::create([
+            'line_items'  => $lineItems,
+            'mode'        => 'payment',
+            'success_url' => route('orders.success'),
+            'cancel_url'  => route('cart.index'),
+        ]);
+
+        return redirect()->away($session->url);
+    }
+
+    public function success()
     {
         $cart = Cart::with('cartItems.product')->where('user_id', Auth::user()->id)->first();
 
@@ -83,7 +120,7 @@ class OrderController extends Controller
 
         session()->flash('success', 'Ordered Successfully!');
 
-        return redirect()->back();
+        return view('marketplace.success');
     }
 
     public function update(Request $request, $id)

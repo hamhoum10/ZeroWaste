@@ -40,7 +40,9 @@ Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart
 // Order routes
 Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('myOrders', [OrderController::class, 'myOrders'])->name('orders.myOrders');
-Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::post('orders', [OrderController::class, 'checkout'])->name('orders.checkout');
+
+Route::get('orders/success', [OrderController::class, 'success'])->name('orders.success');
 Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('myOrders/{id}', [OrderController::class, 'showOwned'])->name('orders.showOwned');
 Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
