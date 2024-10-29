@@ -26,10 +26,23 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        $product = Product::findOrFail($request->product_id);
+        $validatedData = $request->validate([
+            'quantity.' . $request->product_id => 'required|integer|min:1|max:' . $product->quantity
+        ], [
+            'quantity.' . $request->product_id . '.required' => 'The quantity field is required.',
+            'quantity.' . $request->product_id . '.integer' => 'The quantity must be an integer.',
+            'quantity.' . $request->product_id . '.min' => 'The quantity must be at least 1.',
+            'quantity.' . $request->product_id . '.max' => 'The quantity must not be greater than ' . $product->quantity . '.',
+        ]);
+
+
+        $quantity = $validatedData['quantity'][$product->id];
+
         $cart = Cart::firstOrCreate(['user_id' => Auth::user()->id]);
         CartItem::updateOrCreate(
             ['cart_id' => $cart->id, 'product_id' => $request->product_id],
-            ['quantity' => $request->quantity]
+            ['quantity' => $quantity]
         );
         $totalPrice = CartItem::where('cart_id', $cart->id)
         ->join('products', 'cart_items.product_id', '=', 'products.id')
@@ -45,6 +58,10 @@ class CartController extends Controller
 
     public function update(Request $request, CartItem $cartItem)
     {
+        $validatedData = $request->validate([
+            'quantity' => 'required|integer|min:1|max:' . $cartItem->product->quantity
+        ]);
+
         $cart = Cart::firstOrCreate(['user_id' => Auth::user()->id]);
         $cartItem->update(['quantity' => $request->quantity]);
         $totalPrice = CartItem::where('cart_id', $cart->id)
@@ -53,7 +70,6 @@ class CartController extends Controller
 
         $cart->total_price = $totalPrice;
         $cart->save();
-        error_log( $cart->id);
         session()->flash('success', 'Successfully Updated!');
 
         return redirect()->back();
@@ -61,7 +77,16 @@ class CartController extends Controller
 
     public function destroy(CartItem $cartItem)
     {
+        $cartId = $cartItem->cart_id;
+
         $cartItem->delete();
+        $totalPrice = CartItem::where('cart_id', $cartId)
+        ->join('products', 'cart_items.product_id', '=', 'products.id')
+        ->sum(DB::raw('cart_items.quantity * products.price'));
+
+        $cart = Cart::find($cartId);
+        $cart->total_price = $totalPrice;
+        $cart->save();
 
         session()->flash('success', 'Successfully Removed!');
 

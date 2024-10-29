@@ -76,9 +76,11 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="number" class="form-control quantity-input" name="quantity"
-                                            value="{{ $cart_item->quantity }}" min="1"
-                                            max={{ $cart_item->product->quantity }} style="width: 100px;"
+                                            value="{{ $cart_item->quantity }}" style="width: 100px;"
                                             data-cart-item-id="{{ $cart_item->id }}" onchange="this.form.submit()">
+                                        @error('quantity')
+                                            <span class="fs-6 text-danger">{{ $message }}</span>
+                                        @enderror
                                     </form>
                                 </td>
                                 <td>{{ $cart_item->product->price }} DT</td>

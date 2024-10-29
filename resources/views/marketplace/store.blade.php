@@ -90,12 +90,14 @@
                             <div class="row">
                                 <div class="d-flex">
                                     <input type="hidden" name="product_id" value="{{ $product->id }}" />
-                                    <input class="form-control me-3 w-50" name="quantity" type="number" value="1"
-                                        min="1" max={{ $product->quantity }}
+                                    <input class="form-control me-3 w-50" name="quantity[{{ $product->id }}]" type="number" value="1"
                                         {{ $product->quantity === 0 ? 'disabled' : '' }} />
                                     <button class="btn btn-primary w-100" type="submit"
                                         {{ $product->quantity === 0 ? 'disabled' : '' }}>Add to Cart</button>
                                 </div>
+                                @error('quantity.' . $product->id)
+                                    <span class="mt-2 fs-6 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </form>
                     </div>
