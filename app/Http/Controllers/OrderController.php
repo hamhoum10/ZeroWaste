@@ -138,7 +138,6 @@ class OrderController extends Controller
         $order->delete();
 
         session()->flash('success', 'Successfully Removed!');
-
-        return redirect()->back();
+        return redirect()->route('orders.index');
     }
 }

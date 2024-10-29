@@ -14,6 +14,9 @@
                     <div class="col-sm-10">
                         <input type="text" value="{{ $product->name }}" name="name" class="form-control"
                             id="basic-default-name" placeholder="Product Name" />
+                        @error('name')
+                            <span class="fs-6 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -21,6 +24,9 @@
                     <div class="col-sm-10">
                         <input type="number" value="{{ $product->price }}" name="price" class="form-control"
                             id="basic-default-company" placeholder="Product Price" />
+                        @error('price')
+                            <span class="fs-6 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -28,6 +34,9 @@
                     <div class="col-sm-10">
                         <input type="number" value="{{ $product->quantity }}" name="quantity" class="form-control"
                             id="basic-default-company" placeholder="Product Quantity" />
+                        @error('quantity')
+                            <span class="fs-6 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -35,7 +44,10 @@
                     <div class="col-sm-10">
                         <textarea name="description" id="basic-default-message" class="form-control" placeholder="Product Description"
                             aria-label="Product Description" aria-describedby="basic-icon-default-message2">{{ $product->description }}</textarea>
-                    </div>
+                        @error('description')
+                            <span class="fs-6 text-danger">{{ $message }}</span>
+                        @enderror
+                        </div>
                 </div>
                 <img class="img-fluid d-flex mx-auto my-4" src="{{ asset('assets/img/products/' . $product->image_url) }}"
                     alt="{{ $product->name }}" />
@@ -43,6 +55,9 @@
                     <label for="formFile" class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-10">
                         <input name="image" class="form-control" type="file" id="formFile">
+                        @error('image')
+                                <span class="fs-6 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row justify-content-end">

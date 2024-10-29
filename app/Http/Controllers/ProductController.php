@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -24,9 +25,6 @@ class ProductController extends Controller
         if ($request->has('search') && !empty($request->search)) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
-        error_log("skouzaaaaaaaaaa");
-        error_log($request->sort);
-        error_log($request->search);
         if ($request->has('sort') && !empty($request->sort)) {
             $sort = explode(',', $request->sort); // ['name', 'asc']
             $query->orderBy($sort[0], $sort[1]);
@@ -64,6 +62,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:products,name',
+            'description' => 'required|nullable|string',
+            'quantity' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:0',
+            'image_url' => 'required|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         if ($request->hasFile('image_url')) {
             $imageName = time() . '.' . $request->image_url->extension();
             $request->image_url->move(public_path('assets/img/products'), $imageName);
@@ -111,6 +117,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('products', 'name')->ignore($id)
+            ],
+            'description' => 'required|nullable|string',
+            'quantity' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $product = Product::findOrFail($id);
         $imageName = $product->image_url;
 
