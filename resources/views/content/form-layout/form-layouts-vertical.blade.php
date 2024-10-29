@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+  @extends('layouts/contentNavbarLayout')
 
 @section('title', ' Vertical Layouts - Forms')
 

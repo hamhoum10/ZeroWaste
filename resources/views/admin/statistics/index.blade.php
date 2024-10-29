@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-body">
             <h5>Total Users</h5>
-            <p>{{ $totalUsers }}</p>
+            <p>{{ $totalUsers ?? 0 }}</p>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <div class="card">
           <div class="card-body">
             <h5>Total Orders</h5>
-            <p>{{ $totalOrders }}</p>
+            <p>{{ $totalOrders ?? 0 }}</p>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
         <div class="card">
           <div class="card-body">
             <h5>Total Revenue</h5>
-            <p>${{ number_format($totalRevenue, 2) }}</p>
+            <p>${{ number_format($totalRevenue, 2) ?? 0}}</p>
           </div>
         </div>
       </div>

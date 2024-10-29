@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\LogService;
+use App\Services\StatisticService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    public function __construct(StatisticService $statisticService, LogService $logService)
     {
         $this->middleware('role:admin')->only(['admin', 'create', 'store', 'edit', 'update', 'destroy']);
         $this->middleware('role:user')->only(['index']);
+        $this->statisticService = $statisticService;
+        $this->logService = $logService;
     }
     
     /**
@@ -80,6 +84,12 @@ class ProductController extends Controller
         $product = Product::create(array_merge($request->all(), ['image_url' => $imageName]));
 
         session()->flash('success', 'Successfully Added!');
+
+        // Update the total users statistic
+        $this->statisticService->updateAllStatistics();
+
+        // Log the "make_order" action
+        $this->logService->logAction('make_product', 'Product created with ID: ' . $product->id);
 
         return redirect()->back();
     }

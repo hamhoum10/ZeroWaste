@@ -21,11 +21,10 @@
         <div class="d-flex align-items-end row">
           <div class="col-sm-7">
             <div class="card-body">
-              <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-              <p class="mb-4">You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                your profile.</p>
-
-              <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+              <h5 class="card-title text-primary">ZeroWaste Dashboard Overview 📊</h5>
+              <p class="mb-4">The platform continues to support recycling efforts.
+                <br/>Thank you for your commitment to
+                sustainability!</p>
             </div>
           </div>
           <div class="col-sm-5 text-center text-sm-left">
@@ -60,7 +59,7 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">Total Orders</span>
-              <h3 class="card-title mb-2">{{$totalOrders}}</h3>
+              <h3 class="card-title mb-2">{{$totalOrders ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +72.80%</small>
             </div>
           </div>
@@ -84,7 +83,7 @@
                 </div>
               </div>
               <span>Sales</span>
-              <h3 class="card-title text-nowrap mb-1">${{$totalRevenue}}</h3>
+              <h3 class="card-title text-nowrap mb-1">${{$totalRevenue ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.42%</small>
             </div>
           </div>
@@ -165,7 +164,7 @@
                 </div>
               </div>
               <span class="d-block mb-1">Total Users</span>
-              <h3 class="card-title text-nowrap mb-2">{{$totalUsers}}</h3>
+              <h3 class="card-title text-nowrap mb-2">{{$totalUsers ?? 0}}</h3>
               <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-alt'></i> -14.82%</small>
             </div>
           </div>
@@ -189,7 +188,7 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">Total Products</span>
-              <h3 class="card-title mb-2">{{$totalProducts}}</h3>
+              <h3 class="card-title mb-2">{{$totalProducts ?? 0}}</h3>
               <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.14%</small>
             </div>
           </div>
@@ -368,7 +367,7 @@
     <div class="col-md-6 col-lg-4 order-2 mb-4">
       <div class="card h-100">
         <div class="card-header d-flex align-items-center justify-content-between">
-          <h5 class="card-title m-0 me-2">Transactions</h5>
+          <h5 class="card-title m-0 me-2">Recent Orders</h5>
           <div class="dropdown">
             <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -383,91 +382,25 @@
         </div>
         <div class="card-body">
           <ul class="p-0 m-0">
-            <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/account.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Paypal</small>
-                  <h6 class="mb-0">Send money</h6>
+            @foreach ($latestOrders as $order)
+              <li class="d-flex mb-4 pb-1">
+                <div class="avatar flex-shrink-0 me-3">
+                  <img src="{{ asset('assets/img/icons/unicons/account.png') }}" alt="User" class="rounded">
                 </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">+82.6</h6> <span class="text-muted">USD</span>
+                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                  <div class="me-2">
+                    <small class="text-muted d-block mb-1">{{ $order->user->name }}</small> <!-- User's name -->
+                    <h6 class="mb-0">Order #{{ $order->id }}</h6> <!-- Order ID or any relevant information -->
+                  </div>
+                  <div class="user-progress d-flex align-items-center gap-1">
+                    <h6 class="mb-0">${{ number_format($order->total_price, 2) }}</h6> <!-- Order's total price -->
+                    <span class="text-muted">USD</span>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Wallet</small>
-                  <h6 class="mb-0">Mac'D</h6>
-                </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">+270.69</h6> <span class="text-muted">USD</span>
-                </div>
-              </div>
-            </li>
-            <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/chart.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Transfer</small>
-                  <h6 class="mb-0">Refund</h6>
-                </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">+637.91</h6> <span class="text-muted">USD</span>
-                </div>
-              </div>
-            </li>
-            <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/cc-success.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Credit Card</small>
-                  <h6 class="mb-0">Ordered Food</h6>
-                </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">-838.71</h6> <span class="text-muted">USD</span>
-                </div>
-              </div>
-            </li>
-            <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Wallet</small>
-                  <h6 class="mb-0">Starbucks</h6>
-                </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">+203.33</h6> <span class="text-muted">USD</span>
-                </div>
-              </div>
-            </li>
-            <li class="d-flex">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{asset('assets/img/icons/unicons/cc-warning.png')}}" alt="User" class="rounded">
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                <div class="me-2">
-                  <small class="text-muted d-block mb-1">Mastercard</small>
-                  <h6 class="mb-0">Ordered Food</h6>
-                </div>
-                <div class="user-progress d-flex align-items-center gap-1">
-                  <h6 class="mb-0">-92.45</h6> <span class="text-muted">USD</span>
-                </div>
-              </div>
-            </li>
+              </li>
+            @endforeach
           </ul>
+
         </div>
       </div>
     </div>

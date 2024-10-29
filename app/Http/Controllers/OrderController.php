@@ -6,9 +6,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use App\Services\LogService;
+use App\Services\StatisticService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +16,12 @@ use Stripe\Stripe;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    public function __construct(StatisticService $statisticService,LogService $logService)
     {
         $this->middleware('role:admin')->only(['index', 'show', 'update', 'destroy']);
         $this->middleware('role:user')->only(['myOrders', 'showOwned', 'success', 'checkout']);
+        $this->statisticService = $statisticService;
+        $this->logService = $logService;
     }
 
     public function index()
@@ -119,6 +120,12 @@ class OrderController extends Controller
         $cart->delete();
 
         session()->flash('success', 'Ordered Successfully!');
+
+        // Update the total users statistic
+        $this->statisticService->updateAllStatistics();
+
+        // Log the "make_order" action
+        $this->logService->logAction('make_order', 'Order created with ID: ' . $order->id);
 
         return view('marketplace.success');
     }
