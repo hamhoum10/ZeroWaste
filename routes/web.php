@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BestPracticeController;
+use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,5 +100,12 @@ Route::get('/best-practices', [BestPracticeController::class, 'frontOfficeIndex'
 Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'frontOfficeShow'])->name('best_practices.show');
 
 
+// Add these routes
+Route::post('/best-practices/{bestPractice}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::put('/best-practices/{bestPractice}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/best-practices/{bestPractice}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+
 
 Route::resource('categories', CategoryController::class);
+

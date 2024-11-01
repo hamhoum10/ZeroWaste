@@ -31,8 +31,8 @@
             <p class="card-text">
               <strong>Tags:</strong>
               <span class="badge bg-secondary">
-                #{{ $bestPractice->tags ?? 'No tags available' }}
-              </span>
+                            #{{ $bestPractice->tags ?? 'No tags available' }}
+                        </span>
             </p>
           </div>
 
@@ -44,41 +44,60 @@
               </button>
             </div>
 
-            <!-- Comments -->
-            <div class="d-flex flex-start mb-4">
-              <img class="rounded-circle shadow-1-strong me-3"
-                   src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                   alt="avatar" width="65" height="65" />
-              <div class="card w-100">
-                <div class="card-body p-4">
-                  <h5>Johny Cash</h5>
-                  <p class="small text-muted">3 hours ago</p>
-                  <p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                    ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
-                    viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                    Donec lacinia congue felis in faucibus.
-                  </p>
+            <!-- Display Existing Comments -->
+            @foreach ($bestPractice->comments as $comment)
+              <div class="d-flex flex-start mb-4">
+                <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
+                <div class="card w-100">
+                  <div class="card-body p-4">
+                    <h5>{{ $comment->name }}</h5>
+                    <p class="small text-muted">{{ $comment->created_at->diffForHumans() }}</p>
+                    <p>
+                      <span class="comment-content">{{ $comment->content }}</span>
+                    </p>
+                    <div class="d-flex justify-content-end">
+                      <!-- Edit Comment Button -->
+                      <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editCommentModal-{{ $comment->id }}">
+                        Edit
+                      </button>
+                      <!-- Delete Comment Button -->
+                      <form action="{{ route('comments.destroy', [$bestPractice, $comment]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                   src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
-                   alt="avatar" width="65" height="65" />
-              <div class="card w-100">
-                <div class="card-body p-4">
-                  <h5>Mindy Campbell</h5>
-                  <p class="small text-muted">5 hours ago</p>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus
-                    cumque doloribus dolorum dolor repellat nemo animi at iure autem fuga
-                    cupiditate architecto ut quam provident neque, inventore nisi eos quas?
-                  </p>
+              <!-- Modal for Editing a Comment -->
+              <div class="modal fade" id="editCommentModal-{{ $comment->id }}" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ route('comments.update', [$bestPractice, $comment]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                          <label for="commenterName" class="form-label">Name</label>
+                          <input type="text" class="form-control" name="name" value="{{ $comment->name }}" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="commentText" class="form-label">Comment</label>
+                          <textarea class="form-control" name="content" rows="3" required>{{ $comment->content }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Comment</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            @endforeach
           </section>
 
           <!-- Modal for Adding a Comment -->
@@ -86,20 +105,21 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addCommentModalLabel">Add a Comment</h5>
+                  <h5 class="modal-title" id="addCommentModalLabel">Add Comment</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="{{ route('comments.store', $bestPractice) }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                       <label for="commenterName" class="form-label">Name</label>
-                      <input type="text" class="form-control" id="commenterName" placeholder="Enter your name">
+                      <input type="text" class="form-control" name="name" required>
                     </div>
                     <div class="mb-3">
                       <label for="commentText" class="form-label">Comment</label>
-                      <textarea class="form-control" id="commentText" rows="3" placeholder="Write your comment here"></textarea>
+                      <textarea class="form-control" id="commentText" name="content" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                    <button type="submit" class="btn btn-primary">Submit Comment</button>
                   </form>
                 </div>
               </div>
@@ -114,4 +134,5 @@
       </div>
     </div>
   </div>
+
 @endsection
