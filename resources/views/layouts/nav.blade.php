@@ -90,7 +90,7 @@
         </g>
       </svg>
       </span>
-          <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">sneat</span>
+          <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">ZeroWaste</span>
         </a>
       </div>
       <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
@@ -99,6 +99,21 @@
         </button>
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/front/recycling-centers') }}">Recycling Centers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/challenges') }}">Challenges</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/recycling-tips') }}">Recycling Tips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ route('best_practices.front_office') }}">Best Practices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/products') }}">Store</a>
+          </li>
+          {{-- <li class="nav-item">
             <a class="nav-link fw-medium" aria-current="page" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing#landingHero">Home</a>
           </li>
           <li class="nav-item">
@@ -285,15 +300,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" target="_blank">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-medium" href="{{ route('best_practices.front_office') }}">Best Practices</a>
-          </li>
+          </li> --}}
         </ul>
       </div>
       <div class="landing-menu-overlay d-lg-none"></div>
       <ul class="navbar-nav flex-row align-items-center ms-auto">
-        <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
+        {{-- <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
             <i class='bx bx-lg'></i>
           </a>
@@ -314,13 +326,99 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
         <li>
-          <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/auth/login-cover" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+          <a href="{{ route('cart.index') }}">
+            <i class="menu-icon bx bx-cart fs-2"></i>
+          </a>
         </li>
+        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <div class="avatar avatar-online">
+              <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle">
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1050; position: absolute;">
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar avatar-online">
+                      <img src="{{ asset('assets/img/avatars/1.png') }}" alt
+                           class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <span class="fw-semibold d-block">{{ $connectedUser->name }}</span>
+                    <small class="text-muted">{{ $connectedUser->role }}</small>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <div class="dropdown-divider"></div>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url('/myOrders') }}">
+                <i class='bx bx-receipt me-2'></i>
+                <span class="align-middle">Orders</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ url('/my-recycling-tips') }}">
+                <i class='bx bx-recycle me-2'></i>
+                <span class="align-middle">My Recycling Tips</span>
+              </a>
+            </li>
+
+            
+            {{--<li>
+              <a class="dropdown-item" href="javascript:void(0);">
+                <i class='bx bx-cog me-2'></i>
+                <span class="align-middle">Settings</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);">
+                  <span class="d-flex align-items-center align-middle">
+                      <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                      <span class="flex-grow-1 align-middle">Billing</span>
+                      <span
+                        class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                  </span>
+              </a>
+            </li>
+            <li>
+              <div class="dropdown-divider"></div>
+            </li> --}}
+            <li>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+              <a class="dropdown-item" href="javascript:void(0);"
+                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class='bx bx-power-off me-2'></i>
+                <span class="align-middle">Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{-- <li>
+          <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/auth/login-cover" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+        </li> --}}
       </ul>
     </div>
   </div>
 </nav>
 </body>
+<style>
+  .custom-layout-navbar {
+      position: relative;  /* Ensure the navbar is positioned correctly */
+      z-index: 1000; /* Set a lower z-index for the navbar */
+  }
+
+  .navbar-dropdown .dropdown-menu {
+      z-index: 1050; /* Ensure the dropdown has a higher z-index */
+  }
+</style>
 </html>

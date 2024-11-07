@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('title', 'Orders')
 
@@ -98,5 +98,11 @@
     </div>
 
     @yield('order')
+
+    <style>
+        body {
+            background-color: rgb(247, 243, 243) !important
+        }
+    </style>
 
 @endsection

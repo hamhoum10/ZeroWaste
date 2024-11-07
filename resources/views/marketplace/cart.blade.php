@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('title', 'Cart')
 
@@ -117,4 +117,9 @@
             </div>
         </div>
     </div>
+    <style>
+        body {
+            background-color: rgb(247, 243, 243) !important
+        }
+    </style>
 @endsection

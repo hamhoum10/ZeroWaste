@@ -1,5 +1,5 @@
-@extends('layouts/contentNavbarLayout')
-
+{{-- @extends('layouts/contentNavbarLayout') --}}
+@extends('layouts/front')
 @section('title', 'Store')
 
 @section('vendor-script')
@@ -46,19 +46,18 @@
 
     <h4 class="fw-bold pt-3 mb-0"><span class="text-muted fw-light">Products</span></h4>
 
-    <nav class="layout-navbar my-4 container-fluid navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-        id="layout-navbar">
+    <div class="custom-layout-navbar rounded my-4 container-fluid navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" style="height: 70px">
         <div class="container-fluid">
             <form action="{{ route('products.index') }}" method="GET" id="filter-form" class="d-flex justify-content-between w-100">
                 <div class="navbar-nav align-items-center">
                     <div class="nav-item d-flex align-items-center">
                         <i class="bx bx-search fs-4 lh-0"></i>
-                        <input type="text" name="search" class="form-control border-0 shadow-none"
+                        <input type="text" name="search" class="form-control border-0 shadow-none text-black"
                             placeholder="Search..." aria-label="Search..." value="{{ request('search') }}">
                     </div>
                 </div>
 
-                <div class="ms-3 w-25   ">
+                <div class="ms-3 w-25">
                     <select class="form-select" name="sort" id="sort-select" aria-label="Sort by"
                         onchange="submitForm()">
                         <option value="" selected hidden>Sort by</option>
@@ -71,13 +70,12 @@
                 </div>
             </form>
         </div>
-    </nav>
+    </div>
 
-    <!-- Examples -->
-    <div class="row mb-5" data-masonry='{"percentPosition": true }'>
+    <div class="row my-5" data-masonry='{"percentPosition": true }'>
         @foreach ($products as $product)
             <div class="col-sm-6 col-lg-4 mb-3">
-                <div class="card h-100">
+                <div class="card h-100 product-card">
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <h6 class="card-subtitle text-muted">{{ $product->description }}</h6>
@@ -105,5 +103,18 @@
             </div>
         @endforeach
     </div>
+
+    <style>
+        body {
+            background-color: rgb(247, 243, 243) !important
+        }    
+        .product-card {
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+        
+        .product-card:hover {
+            transform: scale(1.02); /* Slightly increase size on hover */
+        }
+    </style>
 
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('content')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -26,9 +26,9 @@
               <dd class="col-sm-9">{{ $wasteCategory->updated_at->format('Y-m-d \a\t H:i') }}</dd>
             </dl>
           </div>
-          <div class="card-footer text-end">
+          {{-- <div class="card-footer text-end">
             <a href="{{ route('wastecategories.index') }}" class="btn btn-secondary">Back to Categories</a>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>

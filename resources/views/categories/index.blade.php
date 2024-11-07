@@ -1,8 +1,8 @@
-@php
+{{-- @php
   $isNavbar = false;
   $isMenu = false;
   $navbarHideToggle = false;
-@endphp
+@endphp --}}
 
 @extends('layouts/contentNavbarLayout')
 

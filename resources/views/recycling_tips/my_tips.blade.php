@@ -4,6 +4,10 @@
   <div class="container py-5">
     <h1 class="text-center mb-4">My Recycling Tips</h1>
 
+    <div class="text-right mb-4">
+      <a href="{{ route('recycling-tips.create') }}" class="btn btn-primary">Create New recycle Tip</a>
+    </div>
+
     @if ($tips->isEmpty())
       <p class="text-center">You have not created any tips yet.</p>
     @else

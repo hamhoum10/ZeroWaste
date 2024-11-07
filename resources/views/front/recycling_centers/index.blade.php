@@ -1,9 +1,9 @@
-@php
+{{-- @php
   $isMenu = false;
   $navbarHideToggle = false;
-@endphp
+@endphp --}}
 
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('title', 'Recycling Centers Map')
 
@@ -150,7 +150,7 @@
         </div>
 
         <div class="card-footer text-end">
-          <a href="{{ route('recycling-centers.index') }}" class="btn btn-secondary">Back</a>
+          <a href="{{ url('front/recycling-centers') }}" class="btn btn-secondary">Back</a>
         </div>
       </div>
     </div>

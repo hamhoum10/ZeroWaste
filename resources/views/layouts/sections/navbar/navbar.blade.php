@@ -49,16 +49,16 @@
             <!-- /Search -->
             <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-              <a href="{{ route('cart.index') }}">
+              {{-- <a href="{{ route('cart.index') }}">
                 <i class="menu-icon bx bx-cart"></i>
-              </a>
+              </a> --}}
 
               <!-- Place this tag where you want the button to render. -->
-              <li class="nav-item lh-1 me-3">
+              {{-- <li class="nav-item lh-1 me-3">
                 <a class="github-button" href="https://github.com/themeselection/sneat-html-laravel-admin-template-free"
                    data-icon="octicon-star" data-size="large" data-show-count="true"
                    aria-label="Star themeselection/sneat-html-laravel-admin-template-free on GitHub">Star</a>
-              </li>
+              </li> --}}
 
               <!-- User -->
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -87,7 +87,7 @@
                   <li>
                     <div class="dropdown-divider"></div>
                   </li>
-                  <li>
+                  {{-- <li>
                     <a class="dropdown-item" href="javascript:void(0);">
                       <i class="bx bx-user me-2"></i>
                       <span class="align-middle">My Profile</span>
@@ -111,7 +111,7 @@
                   </li>
                   <li>
                     <div class="dropdown-divider"></div>
-                  </li>
+                  </li> --}}
                   <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
