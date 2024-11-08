@@ -25,6 +25,8 @@ use App\Http\Controllers\authentications\LoginBasic;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BestPracticeController;
+use App\Http\Controllers\CommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -203,8 +205,19 @@ Route::prefix('best-practices-BackOffice')->group(function () {
 });
 
 
+Route::prefix('best-practices')->group(function () {
+  // Define route for storing comments
+  Route::post('/{bestPractice}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+  // You can add other comment routes for updating and deleting comments as well:
+  Route::put('/{bestPractice}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+  Route::delete('/{bestPractice}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+});
+
+
 Route::get('/best-practices', [BestPracticeController::class, 'frontOfficeIndex'])->name('best_practices.front_office');
 Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'frontOfficeShow'])->name('best_practices.show');
+
 
 
 Route::resource('categories', CategoryController::class);

@@ -19,10 +19,12 @@ return new class extends Migration
       $table->text('contents');
       $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
       $table->string('tags')->nullable();
-      $table->string('image')->nullable(); // Add image column
+      $table->string('image')->nullable();
+      $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Add user_id column
       $table->timestamps();
     });
   }
+
 
 
 

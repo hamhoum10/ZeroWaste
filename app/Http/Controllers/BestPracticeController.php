@@ -56,10 +56,12 @@ class BestPracticeController extends Controller
       'category_id' => $request->category_id,
       'tags' => $request->tags,
       'image' => $imagePath, // Save the image path in the database
+      'user_id' => auth()->id(), // Add user_id (authenticated user)
     ]);
 
     return redirect()->route('back_office.best_practices.index')->with('success', 'Best Practice added successfully.');
   }
+
 
   public function show(BestPractice $bestPractice)
   {
