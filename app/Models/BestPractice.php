@@ -9,7 +9,14 @@ class BestPractice extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['title', 'contents', 'category_id', 'tags', 'image'];
+  protected $fillable = [
+    'title',
+    'contents',
+    'category_id',
+    'tags',
+    'image',
+    'user_id', // Add user_id to fillable array
+  ];
 
   // Define relationships
   public function category() {
@@ -19,4 +26,10 @@ class BestPractice extends Model
   public function author() {
     return $this->belongsTo(User::class, 'author_id');
   }
+
+  public function comments()
+  {
+    return $this->hasMany(Comment::class);
+  }
+
 }

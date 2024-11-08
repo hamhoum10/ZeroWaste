@@ -1,8 +1,3 @@
-{{-- @php
-  $isNavbar = false;
-  $isMenu = false;
-  $navbarHideToggle = false;
-@endphp --}}
 
 @extends('layouts/contentNavbarLayout')
 
