@@ -11,12 +11,11 @@ class CommentController extends Controller
   public function store(Request $request, BestPractice $bestPractice)
   {
     $request->validate([
-      'name' => 'required|string|max:255',
       'content' => 'required|string',
     ]);
 
     $bestPractice->comments()->create([
-      'name' => $request->name,
+      'user_id' => auth()->id(),
       'content' => $request->content,
     ]);
 
@@ -26,12 +25,10 @@ class CommentController extends Controller
   public function update(Request $request, BestPractice $bestPractice, Comment $comment)
   {
     $request->validate([
-      'name' => 'required|string|max:255',
       'content' => 'required|string',
     ]);
 
     $comment->update([
-      'name' => $request->name,
       'content' => $request->content,
     ]);
 
@@ -43,7 +40,4 @@ class CommentController extends Controller
     $comment->delete();
     return redirect()->route('best_practices.show', $bestPractice)->with('success', 'Comment deleted successfully.');
   }
-
-
-
 }

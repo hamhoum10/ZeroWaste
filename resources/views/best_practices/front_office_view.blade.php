@@ -50,7 +50,7 @@
                 <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
                 <div class="card w-100">
                   <div class="card-body p-4">
-                    <h5>{{ $comment->name }}</h5>
+                    <h5>{{ $comment->user->name }}</h5> <!-- Display user's name -->
                     <p class="small text-muted">{{ $comment->created_at->diffForHumans() }}</p>
                     <p>
                       <span class="comment-content">{{ $comment->content }}</span>
@@ -84,12 +84,8 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                          <label for="commenterName" class="form-label">Name</label>
-                          <input type="text" class="form-control" name="name" value="{{ $comment->name }}" required>
-                        </div>
-                        <div class="mb-3">
-                          <label for="commentText" class="form-label">Comment</label>
-                          <textarea class="form-control" name="content" rows="3" required>{{ $comment->content }}</textarea>
+                          <label for="commentText-{{ $comment->id }}" class="form-label">Comment</label>
+                          <textarea class="form-control" id="commentText-{{ $comment->id }}" name="content" rows="3" required>{{ $comment->content }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Comment</button>
                       </form>
@@ -98,6 +94,9 @@
                 </div>
               </div>
             @endforeach
+
+
+
           </section>
 
           <!-- Modal for Adding a Comment -->
@@ -112,10 +111,6 @@
                   <form action="{{ route('comments.store', $bestPractice) }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                      <label for="commenterName" class="form-label">Name</label>
-                      <input type="text" class="form-control" name="name" required>
-                    </div>
-                    <div class="mb-3">
                       <label for="commentText" class="form-label">Comment</label>
                       <textarea class="form-control" id="commentText" name="content" rows="3" required></textarea>
                     </div>
@@ -125,6 +120,7 @@
               </div>
             </div>
           </div>
+
 
           <!-- Back Link -->
           <div class="card-footer bg-light text-center mt-4">
