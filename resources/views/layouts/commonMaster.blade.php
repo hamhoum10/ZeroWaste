@@ -28,10 +28,6 @@
   @yield('layoutContent')
   <!--/ Layout Content -->
 
-  {{-- remove while creating package --}}
-
-  {{-- remove while creating package end --}}
-
   <!-- Include Scripts -->
   @include('layouts/sections/scripts')
 
