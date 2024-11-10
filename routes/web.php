@@ -12,6 +12,9 @@ use App\Http\Controllers\dashboard\Analytics;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FrontOfficeController;
 
 //use App\Http\Controllers\PostController;
 //use App\Http\Controllers\EventController;
@@ -180,6 +183,15 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 
 //homhoum test
 
+Route::resource('posts', PostController::class);
+Route::resource('events', EventController::class);
+// Front office routes for events
+Route::get('/fevents', [FrontOfficeController::class, 'index'])->name('front.index');
+Route::get('/fevents/{id}', [FrontOfficeController::class, 'show'])->name('front.show');
+
+
+//homhoum test
+
 
 Route::resource('wastecategories', WasteCategoryController::class);
 
@@ -221,4 +233,5 @@ Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'fr
 
 
 Route::resource('categories', CategoryController::class);
+
 

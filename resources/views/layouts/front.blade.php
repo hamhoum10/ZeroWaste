@@ -1,4 +1,5 @@
 @extends('layouts/commonMaster' )
+
 @php
   $isNavbar = true;
   $isMenu = false;
@@ -68,3 +69,4 @@
     </div>
     <!-- / Layout wrapper -->
 @endsection
+
