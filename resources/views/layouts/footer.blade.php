@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-        <title>Landing - Front Pages |
-          sneat -
-          Bootstrap Dashboard PRO
-        </title>
-        <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-        <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-        <meta name="csrf-token" content="5U8DajVECij5C9O5FuZqx2QgE9LbdBVZKRaJNQts">
-        <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-laravel-admin-template/">
-        <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet">
-      <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/boxicons-DtPkwNNx.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/boxicons-DtPkwNNx.css" class="" />
-      <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/demo-1L0brNjh.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-DxeCMOHB.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css" class="template-customizer-core-css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css" class="template-customizer-theme-css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/demo-1L0brNjh.css" class="" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-DxeCMOHB.css" class="" />
-      <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/nouislider-CZLdxS9m.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/swiper-G9k5WXhR.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/nouislider-CZLdxS9m.css" class="" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/swiper-G9k5WXhR.css" class="" />
-      <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-landing-DXFDDv4g.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-landing-DXFDDv4g.css" class="" />
-      <link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/helpers-vQTkHFGf.js" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/helpers-vQTkHFGf.js"></script>
-        <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-DZJDgwzD.css" /><link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-FFhF0JVE.js" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-DZJDgwzD.css" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-FFhF0JVE.js"></script>
-        <link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-config-DfJ5dJVY.js" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-config-DfJ5dJVY.js"></script>
-      <script type="module">
-          window.templateCustomizer = new TemplateCustomizer({
-            cssPath: '',
-            themesPath: '',
-            defaultStyle: "light",
-            displayCustomizer: "1",
-            pathResolver: function(path) {
-              var resolvedPaths = {
-                // Core stylesheets
-                            'core.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css',
-                  'core-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-dark-ChaG_aud.css',
-                // Themes
-                            'theme-default.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css',
-                  'theme-default-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-dark-D2iqss1w.css',
-                            'theme-bordered.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-bordered-BrWDfhG2.css',
-                  'theme-bordered-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-bordered-dark-DOu2D5aG.css',
-                            'theme-semi-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-semi-dark-DhJ0hdki.css',
-                  'theme-semi-dark-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-semi-dark-dark-DHDVl4RN.css',
-                        }
-              return resolvedPaths[path] || path;
-            },
-            'controls': ["rtl","style"],
-          });
-        </script>
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5DDHKGP'); </script>
-      </head>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Landing - Front Pages |
+    sneat -
+    Bootstrap Dashboard PRO
+  </title>
+  <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
+  <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+  <meta name="csrf-token" content="5U8DajVECij5C9O5FuZqx2QgE9LbdBVZKRaJNQts">
+  <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-laravel-admin-template/">
+  <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/boxicons-DtPkwNNx.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/boxicons-DtPkwNNx.css" class="" />
+  <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/demo-1L0brNjh.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-DxeCMOHB.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css" class="template-customizer-core-css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css" class="template-customizer-theme-css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/demo-1L0brNjh.css" class="" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-DxeCMOHB.css" class="" />
+  <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/nouislider-CZLdxS9m.css" /><link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/swiper-G9k5WXhR.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/nouislider-CZLdxS9m.css" class="" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/swiper-G9k5WXhR.css" class="" />
+  <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-landing-DXFDDv4g.css" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-page-landing-DXFDDv4g.css" class="" />
+  <link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/helpers-vQTkHFGf.js" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/helpers-vQTkHFGf.js"></script>
+  <link rel="preload" as="style" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-DZJDgwzD.css" /><link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-FFhF0JVE.js" /><link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-DZJDgwzD.css" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/template-customizer-FFhF0JVE.js"></script>
+  <link rel="modulepreload" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-config-DfJ5dJVY.js" /><script type="module" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/front-config-DfJ5dJVY.js"></script>
+  <script type="module">
+    window.templateCustomizer = new TemplateCustomizer({
+      cssPath: '',
+      themesPath: '',
+      defaultStyle: "light",
+      displayCustomizer: "1",
+      pathResolver: function(path) {
+        var resolvedPaths = {
+          // Core stylesheets
+          'core.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-CJ3e866c.css',
+          'core-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/core-dark-ChaG_aud.css',
+          // Themes
+          'theme-default.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-BDdRDG98.css',
+          'theme-default-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-default-dark-D2iqss1w.css',
+          'theme-bordered.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-bordered-BrWDfhG2.css',
+          'theme-bordered-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-bordered-dark-DOu2D5aG.css',
+          'theme-semi-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-semi-dark-DhJ0hdki.css',
+          'theme-semi-dark-dark.scss': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/build/assets/theme-semi-dark-dark-DHDVl4RN.css',
+        }
+        return resolvedPaths[path] || path;
+      },
+      'controls': ["rtl","style"],
+    });
+  </script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5DDHKGP'); </script>
+</head>
 <body>
 <footer class="landing-footer bg-body footer-text">
-        <div class="footer-top position-relative overflow-hidden z-1">
-          <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/backgrounds/footer-bg.png" alt="footer bg" class="footer-bg banner-bg-img z-n1" />
-          <div class="container">
-            <div class="row gx-0 gy-6 g-lg-10">
-              <div class="col-lg-5">
-                <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing" class="app-brand-link mb-6">
+  <div class="footer-top position-relative overflow-hidden z-1">
+    <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/backgrounds/footer-bg.png" alt="footer bg" class="footer-bg banner-bg-img z-n1" />
+    <div class="container">
+      <div class="row gx-0 gy-6 g-lg-10">
+        <div class="col-lg-5">
+          <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing" class="app-brand-link mb-6">
+
                   <span class="app-brand-logo demo"><svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
           <path d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z" id="path-1"></path>
@@ -89,96 +91,100 @@
         </g>
       </svg>
       </span>
-                  <span class="app-brand-text demo text-white fw-bold ms-2 ps-1">sneat</span>
-                </a>
-                <p class="footer-text footer-logo-description mb-6">
-                  Most developer friendly & highly customisable Admin Dashboard Template.
-                </p>
-                <form class="footer-form">
-                  <label for="footer-email" class="small">Subscribe to newsletter</label>
-                  <div class="d-flex mt-1">
-                    <input type="email" class="form-control rounded-0 rounded-start-bottom rounded-start-top" id="footer-email" placeholder="Your email" />
-                    <button type="submit" class="btn btn-primary shadow-none rounded-0 rounded-end-bottom rounded-end-top">
-                      Subscribe
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="col-lg-2 col-md-4 col-sm-6">
-                <h6 class="footer-title mb-6">Demos</h6>
-                <ul class="list-unstyled">
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" target="_blank" class="footer-link">Vertical Layout</a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-5" target="_blank" class="footer-link">Horizontal Layout</a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-2" target="_blank" class="footer-link">Bordered Layout</a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-3" target="_blank" class="footer-link">Semi Dark Layout</a>
-                  </li>
-                  <li>
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-4" target="_blank" class="footer-link">Dark Layout</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-2 col-md-4 col-sm-6">
-                <h6 class="footer-title mb-6">Pages</h6>
-                <ul class="list-unstyled">
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/pricing" class="footer-link">Pricing</a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/payment" class="footer-link">Payment<span class="badge bg-primary ms-2">New</span></a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/checkout" class="footer-link">Checkout</a>
-                  </li>
-                  <li class="mb-4">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/help-center" class="footer-link">Help Center</a>
-                  </li>
-                  <li>
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/auth/login-cover" target="_blank" class="footer-link">Login/Register</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-3 col-md-4">
-                <h6 class="footer-title mb-6">Download our app</h6>
-                <a href="javascript:void(0);" class="d-block mb-4"><img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/apple-icon.png" alt="apple icon" /></a>
-                <a href="javascript:void(0);" class="d-block"><img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/google-play-icon.png" alt="google play icon" /></a>
-              </div>
+
+            <span class="app-brand-text demo text-white fw-bold ms-2 ps-1">sneat</span>
+          </a>
+          <p class="footer-text footer-logo-description mb-6">
+            Most developer friendly & highly customisable Admin Dashboard Template.
+          </p>
+          <form class="footer-form">
+            <label for="footer-email" class="small">Subscribe to newsletter</label>
+            <div class="d-flex mt-1">
+              <input type="email" class="form-control rounded-0 rounded-start-bottom rounded-start-top" id="footer-email" placeholder="Your email" />
+              <button type="submit" class="btn btn-primary shadow-none rounded-0 rounded-end-bottom rounded-end-top">
+                Subscribe
+              </button>
             </div>
-          </div>
+          </form>
         </div>
-        <div class="footer-bottom py-3 py-md-5">
-          <div class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
-            <div class="mb-2 mb-md-0">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <h6 class="footer-title mb-6">Demos</h6>
+          <ul class="list-unstyled">
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" target="_blank" class="footer-link">Vertical Layout</a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-5" target="_blank" class="footer-link">Horizontal Layout</a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-2" target="_blank" class="footer-link">Bordered Layout</a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-3" target="_blank" class="footer-link">Semi Dark Layout</a>
+            </li>
+            <li>
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-4" target="_blank" class="footer-link">Dark Layout</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <h6 class="footer-title mb-6">Pages</h6>
+          <ul class="list-unstyled">
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/pricing" class="footer-link">Pricing</a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/payment" class="footer-link">Payment<span class="badge bg-primary ms-2">New</span></a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/checkout" class="footer-link">Checkout</a>
+            </li>
+            <li class="mb-4">
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/help-center" class="footer-link">Help Center</a>
+            </li>
+            <li>
+              <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/auth/login-cover" target="_blank" class="footer-link">Login/Register</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <h6 class="footer-title mb-6">Download our app</h6>
+          <a href="javascript:void(0);" class="d-block mb-4"><img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/apple-icon.png" alt="apple icon" /></a>
+          <a href="javascript:void(0);" class="d-block"><img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/landing-page/google-play-icon.png" alt="google play icon" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom py-3 py-md-5">
+    <div class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
+      <div class="mb-2 mb-md-0">
+
               <span class="footer-bottom-text">©
                 <script>
                 document.write(new Date().getFullYear());
                 </script>
               </span>
-              <a href="https://themeselection.com" target="_blank" class="text-white">ThemeSelection,</a>
-              <span class="footer-bottom-text"> Made with ❤️ for a better web.</span>
-            </div>
-            <div>
-              <a href="https://github.com/themeselection" class="me-4" target="_blank">
-                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/github.svg" alt="github icon" />
-              </a>
-              <a href="https://www.facebook.com/ThemeSelections/" class="me-4" target="_blank">
-                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/facebook.svg" alt="facebook icon" />
-              </a>
-              <a href="https://twitter.com/Theme_Selection" class="me-4" target="_blank">
-                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/twitter.svg" alt="twitter icon" />
-              </a>
-              <a href="https://www.instagram.com/themeselection/" target="_blank">
-                <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/instagram.svg" alt="google icon" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+
+        <a href="https://themeselection.com" target="_blank" class="text-white">ThemeSelection,</a>
+        <span class="footer-bottom-text"> Made with ❤️ for a better web.</span>
+      </div>
+      <div>
+        <a href="https://github.com/themeselection" class="me-4" target="_blank">
+          <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/github.svg" alt="github icon" />
+        </a>
+        <a href="https://www.facebook.com/ThemeSelections/" class="me-4" target="_blank">
+          <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/facebook.svg" alt="facebook icon" />
+        </a>
+        <a href="https://twitter.com/Theme_Selection" class="me-4" target="_blank">
+          <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/twitter.svg" alt="twitter icon" />
+        </a>
+        <a href="https://www.instagram.com/themeselection/" target="_blank">
+          <img src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/front-pages/icons/instagram.svg" alt="google icon" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
+
