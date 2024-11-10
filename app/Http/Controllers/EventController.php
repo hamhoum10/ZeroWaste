@@ -12,10 +12,22 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::all();
-        return view('events.index', compact('events'));
+        $query = Event::query();
+    
+        // Filter by date if provided
+        if ($request->has('date') && $request->date) {
+            $query->whereDate('start_date', $request->date);
+        }
+    
+        // Filter by event name if provided
+        if ($request->has('event_name') && $request->event_name) {
+            $query->where('event_name', 'like', '%' . $request->event_name . '%');
+        }
+    
+        $events = $query->get(); // Get events based on filters
+        return view('events.index', compact('events')); // Adjust path if necessary
     }
 
     /**

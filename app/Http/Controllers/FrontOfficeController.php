@@ -8,10 +8,17 @@ use App\Models\Event;
 class FrontOfficeController extends Controller
 {
      // Display all events for the front office
-     public function index()
+     public function index(Request $request)
      {
-         $events = Event::all(); // Get all events
-         return view('front.index', compact('events'));
+        $query = Event::query();
+
+    // Filter by date if provided
+    if ($request->has('date') && $request->date) {
+        $query->whereDate('start_date', $request->date);
+    }
+
+    $events = $query->get(); // Get events based on filter
+    return view('front.index', compact('events'));
      }
  
      // Display a specific event for the front office

@@ -1,7 +1,21 @@
-@extends('layouts/front')  <!-- Assuming you have a front office layout -->
+@extends('layouts/front')
+
 @section('content')
 <div class="container my-5">
     <h1>Upcoming Events</h1>
+    
+    <!-- Date Search Form -->
+    <form method="GET" action="{{ route('front.index') }}" class="mb-4">
+        <div class="form-group row">
+            <label for="date" class="col-md-2 col-form-label">Filter by Date:</label>
+            <div class="col-md-4">
+                <input type="date" id="date" name="date" class="form-control" value="{{ request('date') }}">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
 
     @if($events->count() > 0)
         <div class="row">
