@@ -116,6 +116,9 @@
           <li class="nav-item">
             <a class="nav-link fw-medium" href="{{ url('/products') }}">Store</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/fevents') }}">Event</a>
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link fw-medium" aria-current="page" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing#landingHero">Home</a>
           </li>
