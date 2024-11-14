@@ -233,5 +233,6 @@ Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'fr
 
 
 Route::resource('categories', CategoryController::class);
+Route::post('/events/{id}/send-reservation-email', [EventController::class, 'sendReservationEmail'])->name('events.sendReservationEmail');
 
 

@@ -3,10 +3,32 @@
 namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EventReservation;
 
 
 class EventController extends Controller
 {
+    public function sendReservationEmail($id)
+    {
+        $user = auth()->user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Please log in to reserve the event.');
+    }
+
+    // Retrieve the event by its ID
+    $event = Event::findOrFail($id);
+
+    // Send email with the event data
+    Mail::to($user->email)->send(new EventReservation($event, $user));
+
+    return back()->with('success', 'Reservation email sent successfully!');
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      *

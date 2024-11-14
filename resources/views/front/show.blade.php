@@ -1,6 +1,5 @@
 @extends('layouts/front')  <!-- Assuming you have a front office layout -->
 
-
 @section('content')
 <div class="container my-5">
     <h1>{{ $event->event_name }}</h1>
@@ -9,15 +8,33 @@
             @if ($event->event_image)
                 <img src="{{ asset('images/' . $event->event_image) }}" alt="{{ $event->event_name }}" class="img-fluid" style="max-height: 400px; object-fit: cover;">
             @endif
-        </div>
+        </div> 
         <div class="col-md-6">
             <p><strong>Description:</strong> {{ $event->description }}</p>
             <p><strong>Location:</strong> {{ $event->location }}</p>
             <p><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y, H:i') }}</p>
             <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y, H:i') }}</p>
+            <div class="d-flex mt-3">
+            
+            <form action="{{ route('events.sendReservationEmail', $event->event_id) }}" method="POST" onsubmit="disableButton()">
+                @csrf
+                <button type="submit" class="btn btn-success" id="reserveButton">Reserve Event</button>
+            </form>
+
+           &nbsp &nbsp&nbsp
             <a href="{{ route('front.index') }}" class="btn btn-secondary">Back to Events</a>
-            <a class="btn btn-success ">Join Event</a>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function disableButton() {
+        const button = document.getElementById('reserveButton');
+        button.disabled = true;
+        button.innerText = 'Reserved';
+        button.classList.remove('btn-success');
+        button.classList.add('btn-secondary'); // Change color to grey
+    }
+</script>
 @endsection
