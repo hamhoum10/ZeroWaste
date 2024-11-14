@@ -144,8 +144,7 @@
             <dt class="col-sm-3"><i class="fas fa-calendar-check"></i> Updated At</dt>
             <dd class="col-sm-9" id="offcanvas-waste-updated"></dd>
           </dl>
-          <!-- Google Street View Section -->
-          <div id="street-view">a</div>
+
         </div>
 
         <div class="card-footer text-end">
