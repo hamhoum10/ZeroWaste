@@ -42,6 +42,7 @@ class BestPracticeController extends Controller
       'category_id' => 'required|exists:categories,id',
       'tags' => 'nullable|string',
       'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
+      'g-recaptcha-response'=>'recaptcha',
     ]);
 
     // Handle the image upload if provided
