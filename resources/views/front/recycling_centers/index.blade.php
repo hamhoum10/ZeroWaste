@@ -16,7 +16,6 @@
     /* Add this CSS rule to style recent searches horizontally */
     #recent-searches {
       display: flex; /* Use flexbox for horizontal layout */
-      flex-wrap: wrap; /* Allow wrapping to the next line if needed */
       gap: 10px; /* Space between items */
       list-style: none; /* Remove default list styling */
       padding: 0; /* Remove default padding */
@@ -38,7 +37,7 @@
 
     /* Custom CSS for wider offcanvas */
     .offcanvas-lg {
-      width: 700px; /* Adjust the width as needed */
+    width: 700px; /* Adjust the width as needed */
     }
 
     /* Map height */
@@ -104,7 +103,7 @@
   </div>
 
   <!-- Offcanvas for Recycling Center Details -->
-  <div class="offcanvas offcanvas-end offcanvas-lg" tabindex="-1" id="offcanvasDetails" aria-labelledby="offcanvasDetailsLabel">
+  <div class="offcanvas offcanvas-end offcanvas-lg" style="    width: 500px;" tabindex="-1" id="offcanvasDetails" aria-labelledby="offcanvasDetailsLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasDetailsLabel" class="offcanvas-title">Recycling Center Details</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
