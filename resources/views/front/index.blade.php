@@ -36,11 +36,16 @@
                             </p>
                             
                             <!-- Link to the Event Details Page -->
+                            <div class="d-flex mt-3">
                             <a href="{{ route('front.show', $event->event_id) }}" class="btn btn-primary">View Event</a>
                             
                             <!-- Join Button -->
-                            <a class="btn btn-success ">Join Event</a>
-                        </div>
+                            <form action="{{ route('events.sendReservationEmail', $event->event_id) }}" method="POST" onsubmit="disableButton()">
+                            &nbsp &nbsp&nbsp
+                @csrf
+                <button type="submit" class="btn btn-success" id="reserveButton">Reserve Event</button>
+            </form>
+            </div></div>
                     </div>
                 </div>
             @endforeach
@@ -49,4 +54,13 @@
         <p>No upcoming events at the moment.</p>
     @endif
 </div>
+<script>
+    function disableButton() {
+        const button = document.getElementById('reserveButton');
+        button.disabled = true;
+        button.innerText = 'Reserved';
+        button.classList.remove('btn-success');
+        button.classList.add('btn-secondary'); // Change color to grey
+    }
+</script>
 @endsection
