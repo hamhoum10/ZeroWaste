@@ -47,7 +47,7 @@
             <!-- Display Existing Comments -->
             @foreach ($bestPractice->comments as $comment)
               <div class="d-flex flex-start mb-4">
-                <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
+                <img class="rounded-circle shadow-1-strong me-3" src="{{ asset('assets/img/avatars/1.png') }}" alt="avatar" width="65" height="65" />
                 <div class="card w-100">
                   <div class="card-body p-4">
                     <h5>{{ $comment->user->name }}</h5> <!-- Display user's name -->

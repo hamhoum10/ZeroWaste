@@ -44,6 +44,14 @@
               <label class="form-label" for="image">Upload Image:</label>
               <input type="file" class="form-control" id="image" name="image" accept="image/*">
             </div>
+            {!! htmlFormSnippet() !!}
+            @if($errors->has('g-recaptcha-response'))
+              <div>
+                <small class="text-danger">
+                  {{ $errors->first('g-recaptcha-response') }}
+                </small>
+              </div>
+            @endif
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
