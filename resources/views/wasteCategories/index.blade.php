@@ -2,6 +2,7 @@
 
 @section('content')
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
     .btn-spacing {
@@ -98,12 +99,26 @@
 
   <script>
     $(document).ready(function() {
-      $('#search').on('keyup', function() {
+      // Debounce function to prevent too many triggers while typing
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          clearTimeout(timeout);
+          timeout = setTimeout(function() {
+            func.apply(context, args);
+          }, wait);
+        };
+      }
+
+      // Apply the debounce to the search input
+      $('#search').on('keyup', debounce(function() {
         var value = $(this).val().toLowerCase();
         $('#wasteCategoriesTable tbody tr').filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
-      });
+      }, 300)); // 300ms debounce time
     });
   </script>
+
 @endsection

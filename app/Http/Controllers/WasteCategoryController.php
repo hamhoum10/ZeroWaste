@@ -24,7 +24,12 @@ class WasteCategoryController extends Controller
   {
     $request->validate([
       'name' => 'required|unique:waste_categories|max:255',
-      'description' => 'nullable|max:500', // Add validation for description
+      'description' => 'required|max:500',
+    ], [
+      'name.required' => 'The category name is required.',
+      'name.unique' => 'The category name must be unique.',
+      'name.max' => 'The category name must not exceed 255 characters.',
+      'description.max' => 'The description must not exceed 500 characters.',
     ]);
 
     WasteCategory::create($request->all());
@@ -32,6 +37,7 @@ class WasteCategoryController extends Controller
     return redirect()->route('wastecategories.index')
       ->with('success', 'Waste Category created successfully.');
   }
+
 
   public function show($id)
   {
@@ -46,18 +52,25 @@ class WasteCategoryController extends Controller
   }
 
   public function update(Request $request, $id)
-  {    $wasteCategory = WasteCategory::findOrFail($id); // This will also work
+  {
+    $wasteCategory = WasteCategory::findOrFail($id); // Ensure the category is found
 
-    // Debug to ensure the category is found
+    // Debugging information
     error_log('WasteCategory ID: ' . $id);
-    error_log('WasteCategory Name: ' .$wasteCategory->name);
+    error_log('WasteCategory Name: ' . $wasteCategory->name);
 
     $request->validate([
       'name' => [
         'required',
         'max:255',
+        Rule::unique('waste_categories')->ignore($wasteCategory->id),
       ],
-      'description' => 'nullable|max:500',
+      'description' => 'required|max:500',
+    ], [
+      'name.required' => 'The category name is required.',
+      'name.unique' => 'The category name must be unique, except the one you are editing.',
+      'name.max' => 'The category name must not exceed 255 characters.',
+      'description.max' => 'The description must not exceed 500 characters.',
     ]);
 
     // Update the record
@@ -66,6 +79,7 @@ class WasteCategoryController extends Controller
     return redirect()->route('wastecategories.index')
       ->with('success', 'Waste Category updated successfully.');
   }
+
 
 
 

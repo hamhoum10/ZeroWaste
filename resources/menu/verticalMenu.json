@@ -1,29 +1,6 @@
 {
   "menu": [
-    {
-      "menuHeader": "admin",
-      "role": "admin"
-    },
-    {
-      "name": "Dashboard",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
-      "slug": "dashboard-analytics",
-      "role": "admin"
-    },
-    {
-      "name": "Products",
-      "icon": "menu-icon bx bx-store",
-      "slug": "pages-account-settings",
-      "url": "/admin/products",
-      "role": "admin"
-    },
-    {
-      "name": "Orders",
-      "icon": "menu-icon bx bx-receipt",
-      "slug": "pages-account-settings",
-      "url": "/orders",
-      "role": "admin"
-    },
+
     {
       "menuHeader": "user",
       "role": "user"

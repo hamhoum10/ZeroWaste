@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts.contentNavbarLayout')
 
 @section('content')
   <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
@@ -15,16 +15,22 @@
               <label class="form-label" for="name">Waste Category Name:</label>
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-category"></i></span>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name" required>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name" value="{{ old('name') }}">
               </div>
+              @error('name')
+              <div class="alert alert-danger mt-2">{{ $message }}</div>
+              @enderror
             </div>
 
             <div class="mb-3">
               <label class="form-label" for="description">Description:</label>
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-info-circle"></i></span>
-                <textarea name="description" id="description" class="form-control" rows="3" maxlength="500" placeholder="Enter a description (optional)"></textarea>
+                <textarea name="description" id="description" class="form-control" rows="3" maxlength="500" placeholder="Enter a description (optional)">{{ old('description') }}</textarea>
               </div>
+              @error('description')
+              <div class="alert alert-danger mt-2">{{ $message }}</div>
+              @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Create Waste Category</button>

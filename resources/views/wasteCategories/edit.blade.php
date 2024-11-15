@@ -16,7 +16,7 @@
 
       <div class="form-group">
         <label for="name">Category Name:</label>
-        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $wasteCategory->name) }}" required>
+        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $wasteCategory->name) }}">
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
