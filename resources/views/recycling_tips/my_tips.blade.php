@@ -3,9 +3,11 @@
 @section('content')
   <div class="container py-5">
     <h1 class="text-center mb-4">My Recycling Tips</h1>
-
-    <div class="text-right mb-4">
-      <a href="{{ route('recycling-tips.create') }}" class="btn btn-primary">Create New recycle Tip</a>
+    <div style="width: 100%; margin-bottom: 12px" class="d-flex justify-content-between align-items-center">
+      <div class="text-uppercase" style="font-size: 12px"><a href="{{ url('/recycling-tips') }}">Go back</a></div>
+      <a class="btn btn-outline-dark text-uppercase" style="font-size: 12px"
+         href="{{ url('/recycling-tips/create') }}">Create One
+      </a>
     </div>
 
     @if ($tips->isEmpty())
@@ -30,12 +32,14 @@
               <td>{{ $tip->category }}</td>
               <td>{{ $tip->approved ? "Approved" : "Pending"}}</td>
               <td class="inline-block gap-2">
-                <a href="{{ route('recycling-tips.edit', $tip->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('recycling-tips.edit', $tip->id) }}"
+                   style="width: 65px; margin-bottom: 4px"
+                   class="btn btn-warning btn-sm">Edit</a>
                 <form action="{{ route('recycling-tips.delete', $tip->id) }}" method="POST"
                       style="display:inline;">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-danger btn-sm"
+                  <button type="submit" class="btn btn-danger btn-sm" style="width: 65px"
                           onclick="return confirm('Are you sure you want to delete this tip?');">
                     Delete
                   </button>

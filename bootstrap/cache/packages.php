@@ -17,6 +17,13 @@
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
+  'google-gemini-php/laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Gemini\\Laravel\\ServiceProvider',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 

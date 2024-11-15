@@ -66,4 +66,9 @@ class User extends Authenticatable
   {
     return $this->belongsToMany(RecyclingTip::class, 'tip_likes');
   }
+
+  public function challenges()
+  {
+    return $this->belongsToMany(Challenge::class);
+  }
 }
