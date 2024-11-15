@@ -107,6 +107,69 @@
     #recommended-for-you li:hover {
       background-color: #f1f1f1;
     }
+    /* Container for the recommended centers list */
+    #recommended-centers-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Styling for each recommended center item */
+    .recommended-center-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      background-color: #fff;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* Change background color on hover */
+    .recommended-center-item:hover {
+      background-color: #f4f6f9;
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    /* Icon styling */
+    .recommended-center-item i {
+      font-size: 28px; /* Adjust icon size */
+      margin-right: 15px; /* Space between icon and text */
+      color: #4caf50; /* Green color for icons */
+      flex-shrink: 0; /* Prevent icon from shrinking */
+    }
+
+    /* Container for the details of the center */
+    .center-details {
+      flex-grow: 1; /* Ensure details take up remaining space */
+    }
+
+    /* Styling for the center name */
+    .center-details h4 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 600;
+      color: #333; /* Dark color for text */
+    }
+
+    /* Styling for address and other details */
+    .center-details p {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #777; /* Lighter color for less important text */
+    }
+
+    /* Additional spacing and text adjustment for phone numbers and hours */
+    .center-details p:first-child {
+      font-weight: 500;
+      color: #555;
+    }
+
+    .center-details p:last-child {
+      color: #444;
+    }
 
   </style>
 
@@ -199,13 +262,46 @@
     }
 
     recommendedCenters.forEach(function(center) {
+      // Create a list item for each center
       const listItem = document.createElement('li');
-      listItem.textContent = center.name;
+      listItem.classList.add('recommended-center-item'); // Optionally add a CSS class for styling
+
+      // Create the icon (use FontAwesome icon)
+      const icon = document.createElement('i');
+      icon.classList.add('fa', 'fa-map-marker-alt'); // Default icon: location marker
+      if (center.icon) {
+        icon.classList.replace('fa-map-marker-alt', center.icon); // Replace with custom icon if provided
+      }
+
+      // Create a div to hold the center details
+      const detailsDiv = document.createElement('div');
+      detailsDiv.classList.add('center-details');
+
+      // Add the name of the center
+      const centerName = document.createElement('h4');
+      centerName.textContent = center.name;
+      detailsDiv.appendChild(centerName);
+
+      // Add more details (e.g., address, operating hours, phone number)
+      const centerAddress = document.createElement('p');
+      centerAddress.textContent = `Address: ${center.address}`;
+      detailsDiv.appendChild(centerAddress);
+
+      const operatingHours = document.createElement('p');
+      operatingHours.textContent = `Phone: ${center.phone || 'N/A'}`;
+      detailsDiv.appendChild(operatingHours);
+
+      // Add everything to the list item
+      listItem.appendChild(icon);
+      listItem.appendChild(detailsDiv);
+
+      // Add click event to show details and update the map
       listItem.onclick = function() {
         updateDetails(center); // Show details in the offcanvas
         map.setView([center.latitude, center.longitude], 14); // Zoom to center
       };
-      recommendedList.appendChild(listItem);
+
+      recommendedList.appendChild(listItem); // Add the list item to the list
     });
   }
 
