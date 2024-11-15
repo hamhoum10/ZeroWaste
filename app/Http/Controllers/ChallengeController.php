@@ -90,6 +90,18 @@ class ChallengeController extends Controller
       'end_date.after_or_equal' => 'The end date must be on or after the start date.',
     ]);
 
+
+    Challenge::create([
+      'title' => $request->title,
+      'description' => $request->description,
+      'category' => $request->category,
+      'start_date' => $request->start_date,
+      'end_date' => $request->end_date,
+      'created_by' => Auth::id(),
+      'participants_count' => 0,
+      'status' => 'Ongoing',
+    ]);
+
     return redirect()->route('admin.challenges.index')->with('success', 'Challenge created successfully.');
   }
 
