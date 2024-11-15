@@ -288,6 +288,10 @@
           </li>
           <li class="nav-item">
             <a class="nav-link fw-medium" href="{{ route('best_practices.front_office') }}">Best Practices</a>
+          </li><li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/challenges') }}">Challenges</a>
+          </li><li class="nav-item">
+            <a class="nav-link fw-medium" href="{{ url('/recycling-tips') }}">Recycling tips</a>
           </li>
         </ul>
       </div>
