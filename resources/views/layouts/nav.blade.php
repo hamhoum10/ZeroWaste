@@ -119,7 +119,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <i class="tf-icons bx bx-menu bx-lg align-middle text-heading fw-medium"></i>
                 </button>
-                <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing"
+                <a href="{{ url('/front/recycling-centers') }}"
                    class="app-brand-link">
 
                 <span class="app-brand-logo demo"><svg width="25" viewBox="0 0 25 42" version="1.1"
