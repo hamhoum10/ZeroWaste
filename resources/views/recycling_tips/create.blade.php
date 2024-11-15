@@ -1,4 +1,4 @@
-@extends('layouts/front')
+@extends('layouts.front')
 
 @section('content')
   <div class="container py-5">
@@ -21,6 +21,7 @@
                 <label for="category">Category:</label>
                 <input type="text" name="category" class="form-control" required>
               </div>
+              <button type="button" class="btn btn-secondary mt-2" id="generate-tip">Generate Tip with AI</button>
               <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
             </form>
           </div>
@@ -28,4 +29,32 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('generate-tip').addEventListener('click', function () {
+      // Get the title value from the form
+      const title = document.querySelector('input[name="title"]').value;
+
+      fetch("{{ route('recycling-tips.generate') }}", {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+          'Content-Type': 'application/json',
+        },
+        // Send the title as part of the request payload
+        body: JSON.stringify({title: title})
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Populate the form fields with generated tip data
+            document.querySelector('textarea[name="description"]').value = data.tip.description;
+            document.querySelector('input[name="category"]').value = data.tip.category;
+          } else {
+            alert('Could not generate a tip. Please try again.');
+          }
+        });
+    });
+
+  </script>
 @endsection

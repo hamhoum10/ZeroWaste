@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/recycling-tips/like/{id}', [RecyclingTipController::class, 'like'])->name('recycling-tips.like');
   Route::get('/recycling-tips/create', [RecyclingTipController::class, 'create'])->name('recycling-tips.create');
   Route::post('/recycling-tips/store', [RecyclingTipController::class, 'store'])->name('recycling-tips.store');
+  Route::post('/recycling-tips/generate', [RecyclingTipController::class, 'generateTip'])->name('recycling-tips.generate');
   Route::get('/recycling-tips/edit/{id}', [RecyclingTipController::class, 'edit'])->name('recycling-tips.edit');
   Route::put('/recycling-tips/update/{id}', [RecyclingTipController::class, 'update'])->name('recycling-tips.update');
   Route::delete('/recycling-tips/delete/{id}', [RecyclingTipController::class, 'destroy'])->name('recycling-tips.delete');
