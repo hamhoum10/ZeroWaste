@@ -196,6 +196,7 @@ Route::get('/fevents/{id}', [FrontOfficeController::class, 'show'])->name('front
 
 Route::resource('wastecategories', WasteCategoryController::class);
 
+
 use App\Http\Controllers\RecyclingCenterController;
 
 Route::resource('recycling-centers', RecyclingCenterController::class);

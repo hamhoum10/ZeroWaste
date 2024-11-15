@@ -45,18 +45,22 @@ class WasteCategoryController extends Controller
     return view('wastecategories.edit', compact('wasteCategory'));
   }
 
-  public function update(Request $request, WasteCategory $wasteCategory)
-  {
+  public function update(Request $request, $id)
+  {    $wasteCategory = WasteCategory::findOrFail($id); // This will also work
+
+    // Debug to ensure the category is found
+    error_log('WasteCategory ID: ' . $id);
+    error_log('WasteCategory Name: ' .$wasteCategory->name);
+
     $request->validate([
       'name' => [
         'required',
         'max:255',
-        Rule::unique('waste_categories')->ignore($wasteCategory->id),
       ],
       'description' => 'nullable|max:500',
     ]);
 
-    // Use only updated fields
+    // Update the record
     $wasteCategory->update($request->only(['name', 'description']));
 
     return redirect()->route('wastecategories.index')
@@ -64,8 +68,10 @@ class WasteCategoryController extends Controller
   }
 
 
-  public function destroy(WasteCategory $wasteCategory)
-  {
+
+  public function destroy($id)
+  {      $wasteCategory = WasteCategory::findOrFail($id); // This will also work
+
     $wasteCategory->delete();
 
     return redirect()->route('wastecategories.index')
