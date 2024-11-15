@@ -131,7 +131,8 @@
     <div class="container">
       <!-- Recommended for you Section -->
       <div id="recommended-for-you">
-        <h3>Recommended for You</h3>
+        <h3>Recommended Centers Near You </h3>
+        <h6>(based on your current locaion ) </h6>
         <ul id="recommended-centers-list"></ul>
       </div>
     </div>
