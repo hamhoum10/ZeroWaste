@@ -5,6 +5,17 @@
 @section('content')
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Create Best Practice</h4>
 
+  <!-- Display Validation Errors -->
+  @if($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
+
   <div class="row">
     <div class="col-xl">
       <div class="card mb-4">
@@ -17,17 +28,17 @@
 
             <div class="mb-3">
               <label class="form-label" for="title">Title:</label>
-              <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="Enter Title" required>
+              <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="Enter Title" >
             </div>
 
             <div class="mb-3">
               <label class="form-label" for="contents">Content:</label>
-              <textarea class="form-control" id="contents" name="contents" placeholder="Enter Content" required>{{ old('contents') }}</textarea>
+              <textarea class="form-control" id="contents" name="contents" placeholder="Enter Content" >{{ old('contents') }}</textarea>
             </div>
 
             <div class="mb-3">
               <label class="form-label" for="category_id">Category:</label>
-              <select class="form-select" id="category_id" name="category_id" required>
+              <select class="form-select" id="category_id" name="category_id" >
                 <option value="">Select a Category</option>
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}">{{ $category->name }}</option>

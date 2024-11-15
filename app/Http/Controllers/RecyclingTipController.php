@@ -34,6 +34,10 @@ class RecyclingTipController extends Controller
       'title' => 'required|string|max:255',
       'description' => 'required|string',
       'category' => 'required|string',
+    ], [
+      'title.required' => 'The title field is required.',
+      'description.required' => 'The description field is required.',
+      'category.required' => 'The category field is required.',
     ]);
 
     RecyclingTip::create([

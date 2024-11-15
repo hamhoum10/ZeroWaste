@@ -4,6 +4,17 @@
   <div class="container py-5">
     <h1 class="text-center mb-4">Edit Challenge</h1>
 
+    <!-- Display Validation Errors -->
+    @if($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
     <form action="{{ route('admin.challenges.update', $challenge->id) }}" method="POST" class="bg-light p-4 rounded shadow">
       @csrf
       <div class="form-group">

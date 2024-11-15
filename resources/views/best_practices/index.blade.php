@@ -1,5 +1,3 @@
-
-
 @extends('layouts/contentNavbarLayout')
 
 @section('content')
@@ -17,7 +15,8 @@
     <!-- Search form -->
     <form method="GET" action="{{ route('back_office.best_practices.index') }}" class="mb-4">
       <div class="input-group">
-        <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="Search Best Practices">
+        <input type="text" class="form-control" name="search" value="{{ request('search') }}"
+               placeholder="Search Best Practices">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
       </div>
     </form>
@@ -37,8 +36,9 @@
             </div>
 
             @if ($bestPractice->image)
-              <img class="img-fluid" src="{{ asset('storage/' . $bestPractice->image) }}"
-                   alt="{{ $bestPractice->title }}" />
+              <img class="img-fluid"
+                   src="{{ asset($bestPractice->image) }}"
+                   alt="{{ $bestPractice->title }}"/>
             @endif
 
             <div class="card-body">

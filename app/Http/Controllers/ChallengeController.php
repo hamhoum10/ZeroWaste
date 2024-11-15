@@ -79,17 +79,15 @@ class ChallengeController extends Controller
       'category' => 'required|string',
       'start_date' => 'required|date',
       'end_date' => 'required|date|after_or_equal:start_date',
-    ]);
-
-    Challenge::create([
-      'title' => $request->title,
-      'description' => $request->description,
-      'category' => $request->category,
-      'start_date' => $request->start_date,
-      'end_date' => $request->end_date,
-      'created_by' => Auth::id(),
-      'participants_count' => 0,
-      'status' => 'Ongoing',
+    ], [
+      'title.required' => 'The title field is required.',
+      'description.required' => 'The description field is required.',
+      'category.required' => 'The category field is required.',
+      'start_date.required' => 'Please specify the start date of the challenge.',
+      'start_date.date' => 'The start date must be a valid date.',
+      'end_date.required' => 'Please specify the end date of the challenge.',
+      'end_date.date' => 'The end date must be a valid date.',
+      'end_date.after_or_equal' => 'The end date must be on or after the start date.',
     ]);
 
     return redirect()->route('admin.challenges.index')->with('success', 'Challenge created successfully.');
@@ -109,6 +107,15 @@ class ChallengeController extends Controller
       'category' => 'required|string',
       'start_date' => 'required|date',
       'end_date' => 'required|date|after_or_equal:start_date',
+    ], [
+      'title.required' => 'The title field is required.',
+      'description.required' => 'The description field is required.',
+      'category.required' => 'The category field is required.',
+      'start_date.required' => 'Please specify the start date of the challenge.',
+      'start_date.date' => 'The start date must be a valid date.',
+      'end_date.required' => 'Please specify the end date of the challenge.',
+      'end_date.date' => 'The end date must be a valid date.',
+      'end_date.after_or_equal' => 'The end date must be on or after the start date.',
     ]);
 
     $challenge = Challenge::findOrFail($id);

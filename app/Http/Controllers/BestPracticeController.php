@@ -8,24 +8,23 @@ use Illuminate\Http\Request;
 
 class BestPracticeController extends Controller
 {
-    public function index(Request $request)
-    {
-        $search = $request->input('search'); // Get the search input
-        $query = BestPractice::with('category', 'author');
+  public function index(Request $request)
+  {
+    $search = $request->input('search'); // Get the search input
+    $query = BestPractice::with('category', 'author');
 
-        // If there's a search term, filter the best practices
-        if ($search) {
-            $query->where('title', 'like', "%{$search}%")
-                ->orWhere('tags', 'like', "%{$search}%")
-                ->orWhereHas('category', function($q) use ($search) {
-                    $q->where('name', 'like', "%{$search}%");
-                });
-        }
-
-        $bestPractices = $query->paginate(10);
-        return view('best_practices.index', compact('bestPractices', 'search')); // Pass search term to the view
+    // If there's a search term, filter the best practices
+    if ($search) {
+      $query->where('title', 'like', "%{$search}%")
+        ->orWhere('tags', 'like', "%{$search}%")
+        ->orWhereHas('category', function ($q) use ($search) {
+          $q->where('name', 'like', "%{$search}%");
+        });
     }
 
+    $bestPractices = $query->paginate(10);
+    return view('best_practices.index', compact('bestPractices', 'search')); // Pass search term to the view
+  }
 
 
   public function create()
@@ -41,14 +40,25 @@ class BestPracticeController extends Controller
       'contents' => 'required',
       'category_id' => 'required|exists:categories,id',
       'tags' => 'nullable|string',
-      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
-      'g-recaptcha-response'=>'recaptcha',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+      'g-recaptcha-response' => 'recaptcha',
+    ], [
+      'title.required' => 'The title field is required.',
+      'contents.required' => 'The contents field is required.',
+      'category_id.required' => 'Please select a category.',
+      'category_id.exists' => 'The selected category does not exist.',
+      'tags.string' => 'Tags must be a valid string.',
+      'image.image' => 'The file must be an image.',
+      'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
+      'image.max' => 'The image size must not exceed 2MB.',
+      'g-recaptcha-response.recaptcha' => 'The CAPTCHA verification failed.',
     ]);
 
-    // Handle the image upload if provided
     $imagePath = null;
     if ($request->hasFile('image')) {
-      $imagePath = $request->file('image')->store('best_practices', 'public');
+      $imageName = time() . '.' . $request->image->extension(); // Get the file extension
+      $request->image->move(public_path('images/best_practices'), $imageName); // Move the file to the desired folder
+      $imagePath = 'images/best_practices/' . $imageName; // Store the file path
     }
 
     BestPractice::create([
@@ -112,11 +122,13 @@ class BestPracticeController extends Controller
     $bestPractice->delete();
     return redirect()->route('back_office.best_practices.index')->with('success', 'Best Practice deleted successfully.');
   }
+
   public function frontOfficeIndex()
   {
     $bestPractices = BestPractice::with('category')->paginate(10);
     return view('best_practices.front_office', compact('bestPractices')); // Update the view path
   }
+
   public function frontOfficeShow(BestPractice $bestPractice)
   {
     return view('best_practices.front_office_view', compact('bestPractice'));

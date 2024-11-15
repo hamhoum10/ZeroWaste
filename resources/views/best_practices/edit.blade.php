@@ -82,7 +82,7 @@
               <input type="file" class="form-control" id="image" name="image">
               @if ($bestPractice->image)
                 <div class="mt-2">
-                  <img src="{{ asset('storage/' . $bestPractice->image) }}"
+                  <img src="{{ asset($bestPractice->image) }}"
                        alt="Current Image" style="max-width: 200px; height: auto;">
                 </div>
               @endif

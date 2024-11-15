@@ -17,7 +17,7 @@
             <!-- Display the image if it exists -->
             @if ($bestPractice->image)
               <img class="card-img-top img-fluid"
-                   src="{{ asset('storage/' . $bestPractice->image) }}"
+                   src="{{ asset($bestPractice->image) }}"
                    alt="{{ $bestPractice->title }}"
                    style="height: 200px; object-fit: cover;" />
             @endif

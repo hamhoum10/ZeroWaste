@@ -4,6 +4,17 @@
 @section('content')
   <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Create Category</h4>
 
+  <!-- Display Validation Errors -->
+  @if($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
+
   <div class="row">
     <div class="col-xl">
       <div class="card mb-4">
@@ -16,7 +27,7 @@
 
             <div class="mb-3">
               <label class="form-label" for="name">Category Name:</label>
-              <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required placeholder="Enter Category Name">
+              <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"  placeholder="Enter Category Name">
             </div>
 
             @if ($errors->any())

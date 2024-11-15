@@ -9,7 +9,7 @@
           <!-- Best Practice Image -->
           @if ($bestPractice->image)
             <div class="text-center mb-4">
-              <img src="{{ asset('storage/' . $bestPractice->image) }}"
+              <img src="{{ asset($bestPractice->image) }}"
                    alt="{{ $bestPractice->title }}"
                    class="img-fluid rounded"
                    style="max-width: 100%; height: auto;">

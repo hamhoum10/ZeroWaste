@@ -7,19 +7,30 @@
       <div class="col-md-8">
         <div class="card shadow-sm">
           <div class="card-body">
+            <!-- Show Validation Errors -->
+            @if($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+
             <form action="{{ route('recycling-tips.store') }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">Title:</label>
-                <input type="text" name="title" class="form-control" required>
+                <input type="text" name="title" class="form-control" value="{{ old('title') }}" >
               </div>
               <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea name="description" class="form-control" rows="10" required></textarea>
+                <textarea name="description" class="form-control" rows="10" >{{ old('description') }}</textarea>
               </div>
               <div class="form-group">
                 <label for="category">Category:</label>
-                <input type="text" name="category" class="form-control" required>
+                <input type="text" name="category" class="form-control" value="{{ old('category') }}" >
               </div>
               <div class="d-flex justify-content-between align-items-center">
                 <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
@@ -35,12 +46,11 @@
 
   <script>
     document.getElementById('generate-tip').addEventListener('click', function () {
-      // Get the title value from the form
       const title = document.querySelector('input[name="title"]').value;
 
       if (!title) {
         alert("Please enter a title to generate a tip.");
-        return; // Stop the function if title is empty
+        return;
       }
 
       fetch("{{ route('recycling-tips.generate') }}", {
@@ -49,13 +59,11 @@
           'X-CSRF-TOKEN': '{{ csrf_token() }}',
           'Content-Type': 'application/json',
         },
-        // Send the title as part of the request payload
         body: JSON.stringify({title: title})
       })
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            // Populate the form fields with generated tip data
             document.querySelector('textarea[name="description"]').value = data.tip.description;
             document.querySelector('input[name="category"]').value = data.tip.category;
           } else {
@@ -63,6 +71,5 @@
           }
         });
     });
-
   </script>
 @endsection
