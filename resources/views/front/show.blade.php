@@ -1,4 +1,4 @@
-@extends('layouts/front')  <!-- Assuming you have a front office layout -->
+@extends('layouts/front')
 
 @section('content')
 <div class="container my-5">
@@ -16,9 +16,20 @@
             <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y, H:i') }}</p>
             <div class="d-flex mt-3">
             
+            <!-- Check if user has already reserved this event -->
+            @php
+                $userReserved = \App\Models\Participant::where('user_email', auth()->user()->email ?? '')
+                                                       ->where('event_id', $event->id)
+                                                       ->exists();
+            @endphp
+
+            <!-- Reserve Event Button -->
             <form action="{{ route('events.sendReservationEmail', $event->event_id) }}" method="POST" onsubmit="disableButton()">
                 @csrf
-                <button type="submit" class="btn btn-success" id="reserveButton">Reserve Event</button>
+                <button type="submit" class="btn btn-{{ $userReserved ? 'secondary' : 'success' }}" 
+                        id="reserveButton" {{ $userReserved ? 'disabled' : '' }}>
+                    {{ $userReserved ? 'Reserved' : 'Reserve Event' }}
+                </button>
             </form>
 
            &nbsp &nbsp&nbsp

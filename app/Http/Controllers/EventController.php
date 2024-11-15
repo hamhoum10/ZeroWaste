@@ -5,7 +5,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EventReservation;
-
+use App\Models\Participant;
 
 class EventController extends Controller
 {
@@ -13,17 +13,40 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'Please log in to reserve the event.');
-    }
-
-    // Retrieve the event by its ID
-    $event = Event::findOrFail($id);
-
-    // Send email with the event data
-    Mail::to($user->email)->send(new EventReservation($event, $user));
-
-    return back()->with('success', 'Reservation email sent successfully!');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please log in to reserve the event.');
+        }
+    
+        // Retrieve the event by its ID
+        $event = Event::findOrFail($id);
+    
+        // Check if reservations are available
+        $currentReservations = $event->participants()->count();
+        if ($currentReservations >= $event->reservation_limit) {
+            return back()->with('error', 'No more reservations available.');
+        }
+    
+        // Check if the user has already reserved this event
+        $alreadyReserved = Participant::where('user_email', $user->email)
+                                       ->where('event_id', $event->event_id)
+                                       ->exists();
+    
+        if ($alreadyReserved) {
+            return back()->with('error', 'You have already reserved this event.');
+        }
+    
+        // Save participant data
+        Participant::create([
+            'user_name' => $user->name,
+            'user_email' => $user->email,
+          'event_id' => $event->event_id,
+            'event_name' => $event->event_name,
+        ]);
+    
+        // Send email with the event data
+        Mail::to($user->email)->send(new EventReservation($event, $user));
+    
+        return back()->with('success', 'Reservation successful!');
     }
 
 

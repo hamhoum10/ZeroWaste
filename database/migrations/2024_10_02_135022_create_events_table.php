@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('location');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->integer('reservation_limit')->default(100);
             $table->timestamps();
         });
     }

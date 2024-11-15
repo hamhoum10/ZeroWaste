@@ -17,9 +17,15 @@ class Event extends Model
         'start_date',
         'end_date',
         'event_image',
+        'reservation_limit',
+        
     ];
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+    public function participants()
+{
+    return $this->hasMany(Participant::class, 'event_id');
+}
 }

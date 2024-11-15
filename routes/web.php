@@ -29,6 +29,7 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ParticipantController;
 
 
 /*
@@ -234,5 +235,7 @@ Route::get('/best-practices/{bestPractice}', [BestPracticeController::class, 'fr
 
 Route::resource('categories', CategoryController::class);
 Route::post('/events/{id}/send-reservation-email', [EventController::class, 'sendReservationEmail'])->name('events.sendReservationEmail');
+Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
+
 
 
