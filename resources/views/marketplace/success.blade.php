@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/front')
 
 @section('title', 'Cart')
 
