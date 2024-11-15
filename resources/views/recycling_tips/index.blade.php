@@ -2,7 +2,15 @@
 
 @section('content')
   <div class="container py-5">
-    <h1 class="text-center mb-5">Recycling Tips</h1>
+    <div class="">
+      <h1 class="text-center mb-5">Recycling Tips</h1>
+      <div style="width: 100%; text-align: end">
+        <a class="btn btn-outline-dark text-uppercase" style="font-size: 12px"
+                href="{{ url('/my-recycling-tips') }}">show yours
+        </a>
+
+      </div>
+    </div>
     <div class="row">
       @foreach ($tips as $tip)
         <div class="col-md-6 mb-4">

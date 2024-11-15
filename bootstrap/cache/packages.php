@@ -1,9 +1,27 @@
 <?php return array (
+  'biscolab/laravel-recaptcha' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Biscolab\\ReCaptcha\\ReCaptchaServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'ReCaptcha' => 'Biscolab\\ReCaptcha\\Facades\\ReCaptcha',
+    ),
+  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 
     array (
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    ),
+  ),
+  'google-gemini-php/laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Gemini\\Laravel\\ServiceProvider',
     ),
   ),
   'laravel/sail' => 

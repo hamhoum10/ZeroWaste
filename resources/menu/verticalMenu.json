@@ -7,19 +7,43 @@
     {
       "name": "Dashboard",
       "icon": "menu-icon tf-icons bx bx-home-circle",
-      "slug": "layouts",
-      "submenu": [
-        {
-          "url": "/",
-          "name": "Dashboard",
-          "slug": "layouts-without-menu"
-        },
-        {
-          "url": "/admin/user-logs",
-          "name": "Logs",
-          "slug": "layouts-without-navbar"
-        }
-      ],
+      "slug": "dashboard-analytics",
+      "role": "admin"
+    },
+    {
+      "name": "Products",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/admin/products",
+      "role": "admin"
+    },
+    {
+      "name": "Orders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/orders",
+      "role": "admin"
+    },
+    {
+      "menuHeader": "user",
+      "role": "user"
+    },
+    {
+      "name": "Store",
+      "icon": "menu-icon bx bx-store",
+      "slug": "pages-account-settings",
+      "url": "/products",
+      "role": "user"
+    },
+    {
+      "name": "MyOrders",
+      "icon": "menu-icon bx bx-receipt",
+      "slug": "pages-account-settings",
+      "url": "/myOrders",
+      "role": "user"
+    },
+    {
+      "menuHeader": "Pages",
       "role": ""
     },
     {
@@ -77,22 +101,11 @@
       "role": ""
     },
     {
-      "name": "Recycling Centers",
-      "icon": "menu-icon bx bx-map",
-      "slug": "layouts",
-      "submenu": [
-        {
-          "url": "/recycling-centers",
-          "name": "Centers",
-          "slug": "layouts-without-menu"
-        },
-        {
-          "url": "/wastecategories",
-          "name": "Waste",
-          "slug": "layouts-without-navbar"
-        }
-      ],
-      "role": ""
+      "name": "Events",
+      "icon": "menu-icon bx bx-calendar",
+      "slug": "pages-account-settings",
+      "url": "/events",
+      "role": "admin"
     }
   ]
 }
