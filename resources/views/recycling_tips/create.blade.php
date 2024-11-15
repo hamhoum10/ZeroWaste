@@ -15,14 +15,17 @@
               </div>
               <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea name="description" class="form-control" rows="4" required></textarea>
+                <textarea name="description" class="form-control" rows="10" required></textarea>
               </div>
               <div class="form-group">
                 <label for="category">Category:</label>
                 <input type="text" name="category" class="form-control" required>
               </div>
-              <button type="button" class="btn btn-secondary mt-2" id="generate-tip">Generate Tip with AI</button>
-              <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="submit" class="btn btn-primary btn-block mt-2">Submit</button>
+                <button type="button" class="btn btn-secondary mt-2" id="generate-tip">Generate Tips with AI</button>
+                <a href="{{ url('/my-recycling-tips') }}" class="btn btn-secondary btn-block mt-2">Cancel</a>
+              </div>
             </form>
           </div>
         </div>
@@ -34,6 +37,11 @@
     document.getElementById('generate-tip').addEventListener('click', function () {
       // Get the title value from the form
       const title = document.querySelector('input[name="title"]').value;
+
+      if (!title) {
+        alert("Please enter a title to generate a tip.");
+        return; // Stop the function if title is empty
+      }
 
       fetch("{{ route('recycling-tips.generate') }}", {
         method: 'POST',
