@@ -98,11 +98,9 @@ class BestPracticeController extends Controller
     // Handle the image upload if provided
     $imagePath = $bestPractice->image; // Keep existing image path by default
     if ($request->hasFile('image')) {
-      // Delete the old image if it exists
-      if ($bestPractice->image) {
-        \Storage::disk('public')->delete($bestPractice->image);
-      }
-      $imagePath = $request->file('image')->store('best_practices', 'public');
+      $imageName = time() . '.' . $request->image->extension(); // Get the file extension
+      $request->image->move(public_path('images/best_practices'), $imageName); // Move the file to the desired folder
+      $imagePath = 'images/best_practices/' . $imageName; // Store the file path
     }
 
     $bestPractice->update([
