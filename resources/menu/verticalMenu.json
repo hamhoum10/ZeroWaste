@@ -106,7 +106,23 @@
       "slug": "pages-account-settings",
       "url": "/events",
       "role": "admin"
-    }
+    },
+    { "name": "Recycling Centers",
+      "icon": "menu-icon bx bx-map",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "/recycling-centers",
+          "name": "Centers",
+          "slug": "layouts-without-menu"
+        },
+        {
+          "url": "/wastecategories",
+          "name": "Waste",
+          "slug": "layouts-without-navbar"
+        }
+      ],
+      "role": ""}
   ]
 }
 

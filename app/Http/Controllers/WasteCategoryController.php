@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\WasteCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class WasteCategoryController extends Controller
 {
@@ -46,15 +48,21 @@ class WasteCategoryController extends Controller
   public function update(Request $request, WasteCategory $wasteCategory)
   {
     $request->validate([
-      'name' => 'required|unique:waste_categories,name,' . $wasteCategory->id . ',id|max:255', // Corrected unique validation rule
-      'description' => 'nullable|max:500', // Add validation for description
+      'name' => [
+        'required',
+        'max:255',
+        Rule::unique('waste_categories')->ignore($wasteCategory->id),
+      ],
+      'description' => 'nullable|max:500',
     ]);
 
-    $wasteCategory->update($request->all());
+    // Use only updated fields
+    $wasteCategory->update($request->only(['name', 'description']));
 
     return redirect()->route('wastecategories.index')
       ->with('success', 'Waste Category updated successfully.');
   }
+
 
   public function destroy(WasteCategory $wasteCategory)
   {
