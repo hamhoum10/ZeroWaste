@@ -9,6 +9,17 @@
 
   <div class="container">
     <h1 class="fw-bold py-3 mb-4">Edit Recycling Center</h1>
+
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
     <form action="{{ route('recycling-centers.update', $recyclingCenter->id) }}" method="POST">
       @csrf
       @method('PUT')
@@ -17,23 +28,49 @@
         <label class="form-label" for="name">Name</label>
         <div class="input-group input-group-merge">
           <span class="input-group-text"><i class="bx bx-user"></i></span>
-          <input type="text" class="form-control" name="name" value="{{ $recyclingCenter->name }}" required>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            value="{{ old('name', $recyclingCenter->name) }}"
+            >
         </div>
+        @error('name')
+        <small class="text-danger">{{ $message }}</small>
+        @enderror
       </div>
+
       <div class="mb-3">
         <label class="form-label" for="address">Email Address</label>
         <div class="input-group input-group-merge">
           <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-          <input type="email" class="form-control" name="address" value="{{ $recyclingCenter->address }}" required>
+          <input
+            type="email"
+            class="form-control"
+            name="address"
+            value="{{ old('address', $recyclingCenter->address) }}"
+            >
         </div>
+        @error('address')
+        <small class="text-danger">{{ $message }}</small>
+        @enderror
       </div>
+
       <div class="mb-3">
         <label class="form-label" for="phone">Phone</label>
         <div class="input-group input-group-merge">
           <span class="input-group-text"><i class="bx bx-phone"></i></span>
-          <input type="text" class="form-control" name="phone" value="{{ $recyclingCenter->phone }}">
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            value="{{ old('phone', $recyclingCenter->phone) }}">
         </div>
+        @error('phone')
+        <small class="text-danger">{{ $message }}</small>
+        @enderror
       </div>
+
       <div class="mb-3">
         <label for="waste_category_id">Waste Category</label>
         <div class="btn-group">
@@ -54,13 +91,21 @@
             @endforeach
           </ul>
         </div>
-        <input type="hidden" name="waste_category_id" id="waste_category_id" value="{{ $recyclingCenter->waste_category_id }}" required>
+        <input type="hidden" name="waste_category_id" id="waste_category_id" value="{{ old('waste_category_id', $recyclingCenter->waste_category_id) }}" >
+        @error('waste_category_id')
+        <small class="text-danger">{{ $message }}</small>
+        @enderror
       </div>
 
-      <!-- New Map Field -->
       <div id="map" style="height: 400px; margin-top: 20px;"></div>
-      <input type="hidden" name="latitude" id="latitude" value="{{ $recyclingCenter->latitude }}" required>
-      <input type="hidden" name="longitude" id="longitude" value="{{ $recyclingCenter->longitude }}" required>
+      <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $recyclingCenter->latitude) }}" >
+      <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $recyclingCenter->longitude) }}" >
+      @error('latitude')
+      <small class="text-danger">{{ $message }}</small>
+      @enderror
+      @error('longitude')
+      <small class="text-danger">{{ $message }}</small>
+      @enderror
 
       <button type="submit" class="btn btn-primary">Update</button>
     </form>
@@ -73,40 +118,28 @@
         const selectedValue = this.getAttribute('data-value');
         const selectedText = this.innerText;
 
-        // Set the hidden input value
         document.getElementById('waste_category_id').value = selectedValue;
-
-        // Update the dropdown button text
         document.getElementById('selectedCategory').innerText = selectedText;
       });
     });
 
     // Initialize the map
-    var map = L.map('map').setView([{{ $recyclingCenter->latitude }}, {{ $recyclingCenter->longitude }}], 13); // Center the map on the recycling center location
+    var map = L.map('map').setView([{{ old('latitude', $recyclingCenter->latitude) }}, {{ old('longitude', $recyclingCenter->longitude) }}], 13);
 
-    // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    // Add a marker for the existing recycling center location
-    var marker = L.marker([{{ $recyclingCenter->latitude }}, {{ $recyclingCenter->longitude }}]).addTo(map);
+    var marker = L.marker([{{ old('latitude', $recyclingCenter->latitude) }}, {{ old('longitude', $recyclingCenter->longitude) }}]).addTo(map);
 
-    // Function to handle map click
     function onMapClick(e) {
-      // Remove the existing marker if there is one
-      if (marker) {
-        map.removeLayer(marker);
-      }
-      // Add a new marker
+      if (marker) map.removeLayer(marker);
       marker = L.marker(e.latlng).addTo(map);
-      // Set latitude and longitude values in hidden fields
       document.getElementById('latitude').value = e.latlng.lat;
       document.getElementById('longitude').value = e.latlng.lng;
     }
 
-    // Add click event to the map
     map.on('click', onMapClick);
   </script>
 @endsection
