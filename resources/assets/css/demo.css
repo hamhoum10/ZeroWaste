@@ -2,6 +2,15 @@
 * demo.css
 * File include item demo only specific css only
 ******************************************************************************/
+.bg-light-red {
+  background-color: #f8d7da !important;
+  color: #721c24;
+}
+
+table.table tr.bg-light-red {
+  background-color: #f8d7da !important;
+  color: #721c24;
+}
 
 .menu .app-brand.demo {
   height: 64px;
@@ -24,6 +33,7 @@
 .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
   padding-top: 76px !important;
 }
+
 /* Default navbar */
 .layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
   padding-top: 64px !important;
@@ -51,6 +61,7 @@
   margin-top: 1rem !important;
   margin-bottom: 0 !important;
 }
+
 .demo-vertical-spacing.demo-only-element > :first-child {
   margin-top: 0 !important;
 }
@@ -59,6 +70,7 @@
   margin-top: 1.875rem !important;
   margin-bottom: 0 !important;
 }
+
 .demo-vertical-spacing-lg.demo-only-element > :first-child {
   margin-top: 0 !important;
 }
@@ -67,6 +79,7 @@
   margin-top: 5rem !important;
   margin-bottom: 0 !important;
 }
+
 .demo-vertical-spacing-xl.demo-only-element > :first-child {
   margin-top: 0 !important;
 }
@@ -98,9 +111,11 @@
   flex-direction: column;
   margin-top: 1rem;
 }
+
 .layout-demo-placeholder img {
   width: 900px;
 }
+
 .layout-demo-info {
   text-align: center;
   margin-top: 1rem;

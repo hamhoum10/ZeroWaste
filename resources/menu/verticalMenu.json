@@ -26,10 +26,17 @@
       "role": "admin"
     },
     {
-      "name": "Logs",
-      "icon": "menu-icon bx bx-history",
+      "name": "Challenges",
+      "icon": "menu-icon bx bx-trophy",
       "slug": "pages-account-settings",
-      "url": "/admin/user-logs",
+      "url": "/admin/challenges",
+      "role": "admin"
+    },
+    {
+      "name": "Recycling Tips",
+      "icon": "menu-icon bx bx-recycle",
+      "slug": "pages-account-settings",
+      "url": "/admin/recycling-tips/pending",
       "role": "admin"
     },
     {

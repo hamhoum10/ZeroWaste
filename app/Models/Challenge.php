@@ -22,4 +22,20 @@ class Challenge extends Model
     'created_at',
     'updated_at',
   ];
+
+  public function users()
+  {
+    return $this->belongsToMany(User::class);
+  }
+  public function getStatusAttribute(): string
+  {
+    $now = now();
+    if ($this->end_date < $now) {
+      return 'Ended';
+    } elseif ($this->start_date <= $now && $this->end_date >= $now) {
+      return 'Ongoing';
+    } else {
+      return 'Upcoming';
+    }
+  }
 }
