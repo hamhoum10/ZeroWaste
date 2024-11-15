@@ -27,9 +27,18 @@ class RecyclingCenterController extends Controller
   public function index()
   {
     $recyclingCenters = RecyclingCenter::with('wasteCategory')->paginate(5);
-    return view('recycling_centers.index', compact('recyclingCenters'));
+    $centers = RecyclingCenter::all(); // All centers without pagination
+
+    return view('recycling_centers.index', compact('recyclingCenters', 'centers'));
   }
 
+  public function getCenters(Request $request)
+  {
+    // Fetch centers from the database (or apply any filter based on proximity)
+    $centers = RecyclingCenter::all(); // Example: You can add more filters here based on the request (e.g., lat, lon)
+
+    return response()->json($centers);
+  }
   public function create()
   {
     $wasteCategories = WasteCategory::all(); // Fetch all waste categories for the dropdown

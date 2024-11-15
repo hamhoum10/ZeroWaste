@@ -198,6 +198,7 @@ Route::resource('wastecategories', WasteCategoryController::class);
 
 
 use App\Http\Controllers\RecyclingCenterController;
+Route::get('/recycling-centersall', [RecyclingCenterController::class, 'getCenters']);
 
 Route::resource('recycling-centers', RecyclingCenterController::class);
 Route::prefix('front')->name('front.')->group(function () {

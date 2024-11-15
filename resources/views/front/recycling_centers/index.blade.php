@@ -79,6 +79,34 @@
       width: 100%;
       position: relative; /* For absolute positioning of search results */
     }
+    #recommended-for-you {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #recommended-for-you h3 {
+      margin-bottom: 10px;
+    }
+
+    #recommended-for-you ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #recommended-for-you li {
+      padding: 8px;
+      background-color: #fff;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #recommended-for-you li:hover {
+      background-color: #f1f1f1;
+    }
 
   </style>
 
@@ -100,8 +128,90 @@
       <!-- Map container -->
       <div id="map" class="col-md-8"></div>
     </div>
+    <div class="container">
+      <!-- Recommended for you Section -->
+      <div id="recommended-for-you">
+        <h3>Recommended for You</h3>
+        <ul id="recommended-centers-list"></ul>
+      </div>
+    </div>
   </div>
+<script>// Function to get the user's location and display recommendations
+  function getCurrentLocationAndDisplayRecommendations() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const userLat = position.coords.latitude;
+        const userLon = position.coords.longitude;
 
+        // Assuming you have a list of recycling centers
+        const recommendedCenters = getRecommendedCenters(userLat, userLon);
+
+        // Display recommended centers
+        displayRecommendedCenters(recommendedCenters);
+      }, function(error) {
+        console.error("Error getting geolocation: ", error);
+        displayRecommendedCenters(); // Show fallback recommendations
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  // Function to retrieve and sort recommended recycling centers based on proximity
+  function getRecommendedCenters(userLat, userLon) {
+    // Use the recyclingCenters passed from the backend
+    console.log("Recycling Centers: ", recyclingCenters); // Debugging step
+
+    const sortedCenters = recyclingCenters.sort((a, b) => {
+      const distanceA = calculateDistance(userLat, userLon, a.latitude, a.longitude);
+      const distanceB = calculateDistance(userLat, userLon, b.latitude, b.longitude);
+      return distanceA - distanceB; // Closest centers first
+    });
+
+    const recommendedCenters = sortedCenters.slice(0, 5); // Example: show top 5 recommended centers
+    console.log("Recommended Centers: ", recommendedCenters); // Debugging step
+
+    return recommendedCenters;
+  }
+
+  // Function to calculate distance between two lat/lon points (Haversine formula)
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+  }
+
+  // Function to display the recommended centers in the HTML
+  function displayRecommendedCenters(recommendedCenters = []) {
+    const recommendedList = document.getElementById('recommended-centers-list');
+    recommendedList.innerHTML = ''; // Clear the existing list
+
+    if (recommendedCenters.length === 0) {
+      recommendedList.innerHTML = '<li>No recommendations available</li>';
+      return;
+    }
+
+    recommendedCenters.forEach(function(center) {
+      const listItem = document.createElement('li');
+      listItem.textContent = center.name;
+      listItem.onclick = function() {
+        updateDetails(center); // Show details in the offcanvas
+        map.setView([center.latitude, center.longitude], 14); // Zoom to center
+      };
+      recommendedList.appendChild(listItem);
+    });
+  }
+
+  // Call the function to load recommendations on page load
+  getCurrentLocationAndDisplayRecommendations();
+
+</script>
   <!-- Offcanvas for Recycling Center Details -->
   <div class="offcanvas offcanvas-end offcanvas-lg" style="    width: 500px;" tabindex="-1" id="offcanvasDetails" aria-labelledby="offcanvasDetailsLabel">
     <div class="offcanvas-header">
